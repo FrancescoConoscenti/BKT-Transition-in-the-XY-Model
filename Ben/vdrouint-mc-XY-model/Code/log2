@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/ben/Library/CloudStorage/OneDrive-ETHZurich/FS25/CSP/project/BKT-Transition-in-the-XY-Model/Ben/vdrouint-mc-XY-model/Code/./all_data_process.py", line 523, in <module>
+    main()
+  File "/Users/ben/Library/CloudStorage/OneDrive-ETHZurich/FS25/CSP/project/BKT-Transition-in-the-XY-Model/Ben/vdrouint-mc-XY-model/Code/./all_data_process.py", line 207, in main
+    N = int(sys.argv[1])  #note that N is in fact L the linear size
+IndexError: list index out of range

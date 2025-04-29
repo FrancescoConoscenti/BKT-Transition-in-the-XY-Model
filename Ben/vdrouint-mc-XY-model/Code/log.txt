@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/ben/Library/CloudStorage/OneDrive-ETHZurich/FS25/CSP/project/BKT-Transition-in-the-XY-Model/Ben/vdrouint-mc-XY-model/Code/./mcpt-xy.py", line 511, in <module>
+    main()
+  File "/Users/ben/Library/CloudStorage/OneDrive-ETHZurich/FS25/CSP/project/BKT-Transition-in-the-XY-Model/Ben/vdrouint-mc-XY-model/Code/./mcpt-xy.py", line 104, in main
+    type_of_temp_range = int(sys.argv[5])  #either 0 (geometric) or 1 (linear)
+ValueError: invalid literal for int() with base 10: 'WOLFF'
