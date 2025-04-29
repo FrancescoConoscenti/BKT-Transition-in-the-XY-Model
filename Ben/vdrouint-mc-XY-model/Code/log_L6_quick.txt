@@ -1,0 +1,720 @@
+
+Linear size of the system L=6
+Interaction strength:
+J = 1.0
+
+From temperature Tmax=1.1 to Tmin=0.7
+In 10 steps
+
+Size of bins:100
+Number of thermalization bins:100
+Number of measurement bins:500
+number of Cores4
+
+starting the initialization step
+
+list of temperatures
+[0.7        0.74444444 0.78888889 0.83333333 0.87777778 0.92222222
+ 0.96666667 1.01111111 1.05555556 1.1       ]
+start with pre therm
+new number of iteration per temp
+[2 2 2 2 2 2 3 3 3 3]
+
+done with initialization in 1.803492784500122 secs
+
+
+Starting the thermalization
+
+Done with therm step0 out of 100
+Done with therm step1 out of 100
+Done with therm step2 out of 100
+Done with therm step3 out of 100
+Done with therm step4 out of 100
+Done with therm step5 out of 100
+Done with therm step6 out of 100
+Done with therm step7 out of 100
+Done with therm step8 out of 100
+Done with therm step9 out of 100
+Done with therm step10 out of 100
+Done with therm step11 out of 100
+Done with therm step12 out of 100
+Done with therm step13 out of 100
+Done with therm step14 out of 100
+Done with therm step15 out of 100
+Done with therm step16 out of 100
+Done with therm step17 out of 100
+Done with therm step18 out of 100
+Done with therm step19 out of 100
+Done with therm step20 out of 100
+Done with therm step21 out of 100
+Done with therm step22 out of 100
+Done with therm step23 out of 100
+Done with therm step24 out of 100
+Done with therm step25 out of 100
+Done with therm step26 out of 100
+Done with therm step27 out of 100
+Done with therm step28 out of 100
+Done with therm step29 out of 100
+Done with therm step30 out of 100
+Done with therm step31 out of 100
+Done with therm step32 out of 100
+Done with therm step33 out of 100
+Done with therm step34 out of 100
+Done with therm step35 out of 100
+Done with therm step36 out of 100
+Done with therm step37 out of 100
+Done with therm step38 out of 100
+Done with therm step39 out of 100
+Done with therm step40 out of 100
+Done with therm step41 out of 100
+Done with therm step42 out of 100
+Done with therm step43 out of 100
+Done with therm step44 out of 100
+Done with therm step45 out of 100
+Done with therm step46 out of 100
+Done with therm step47 out of 100
+Done with therm step48 out of 100
+Done with therm step49 out of 100
+Done with therm step50 out of 100
+Done with therm step51 out of 100
+Done with therm step52 out of 100
+Done with therm step53 out of 100
+Done with therm step54 out of 100
+Done with therm step55 out of 100
+Done with therm step56 out of 100
+Done with therm step57 out of 100
+Done with therm step58 out of 100
+Done with therm step59 out of 100
+Done with therm step60 out of 100
+Done with therm step61 out of 100
+Done with therm step62 out of 100
+Done with therm step63 out of 100
+Done with therm step64 out of 100
+Done with therm step65 out of 100
+Done with therm step66 out of 100
+Done with therm step67 out of 100
+Done with therm step68 out of 100
+Done with therm step69 out of 100
+Done with therm step70 out of 100
+Done with therm step71 out of 100
+Done with therm step72 out of 100
+Done with therm step73 out of 100
+Done with therm step74 out of 100
+Done with therm step75 out of 100
+Done with therm step76 out of 100
+Done with therm step77 out of 100
+Done with therm step78 out of 100
+Done with therm step79 out of 100
+Done with therm step80 out of 100
+Done with therm step81 out of 100
+Done with therm step82 out of 100
+Done with therm step83 out of 100
+Done with therm step84 out of 100
+Done with therm step85 out of 100
+Done with therm step86 out of 100
+Done with therm step87 out of 100
+Done with therm step88 out of 100
+Done with therm step89 out of 100
+Done with therm step90 out of 100
+Done with therm step91 out of 100
+Done with therm step92 out of 100
+Done with therm step93 out of 100
+Done with therm step94 out of 100
+Done with therm step95 out of 100
+Done with therm step96 out of 100
+Done with therm step97 out of 100
+Done with therm step98 out of 100
+Done with therm step99 out of 100
+
+Done with thermalization
+in 7.473479986190796 seconds
+number of steps 10000
+time per step (full PT + Metro)0.0007473479986190796
+time per step per temp (full PT + Metro)7.473479986190796e-05
+
+a comparison of the energies for the first and last quarter of therm
+
+0.7
+first average
+-1.6076173576526667 0.09716682784829217
+second average
+-1.6091207272221149 0.09613220414790999
+difference  0.0015033695694481874
+
+0.7444444444444445
+first average
+-1.5761052123899262 0.10702975412780528
+second average
+-1.5776147569489498 0.10858739698486049
+difference  0.0015095445590236345
+
+0.7888888888888889
+first average
+-1.542808254589071 0.11791864932074833
+second average
+-1.542468374557546 0.11756630360546097
+difference  -0.0003398800315248529
+
+0.8333333333333334
+first average
+-1.511018154969021 0.1244008703925309
+second average
+-1.5094139178491335 0.12890402298581338
+difference  -0.0016042371198874417
+
+0.8777777777777778
+first average
+-1.4762513876241323 0.13800326437634078
+second average
+-1.4766895504721476 0.13596539363110863
+difference  0.0004381628480152333
+
+0.9222222222222223
+first average
+-1.431538201853736 0.14742275691155168
+second average
+-1.4407039652956837 0.14999529579641577
+difference  0.00916576344194775
+
+0.9666666666666668
+first average
+-1.3958936835131863 0.15790931050536763
+second average
+-1.3980279700628788 0.15757450863610553
+difference  0.002134286549692499
+
+1.011111111111111
+first average
+-1.3469806012295586 0.17452918193998795
+second average
+-1.3464848783289094 0.17460125783826627
+difference  -0.0004957229006492536
+
+1.0555555555555556
+first average
+-1.3041223882288777 0.18676374289348624
+second average
+-1.3063674423213796 0.18645124760408038
+difference  0.0022450540925018636
+
+1.1
+first average
+-1.2444731759055359 0.2028323188551462
+second average
+-1.248892519715875 0.20896115734045706
+difference  0.004419343810339038
+
+now onto the measurement!
+
+
+Starting the measurements
+
+Done with measure step0 out of 500
+Done with measure step1 out of 500
+Done with measure step2 out of 500
+Done with measure step3 out of 500
+Done with measure step4 out of 500
+Done with measure step5 out of 500
+Done with measure step6 out of 500
+Done with measure step7 out of 500
+Done with measure step8 out of 500
+Done with measure step9 out of 500
+Done with measure step10 out of 500
+Done with measure step11 out of 500
+Done with measure step12 out of 500
+Done with measure step13 out of 500
+Done with measure step14 out of 500
+Done with measure step15 out of 500
+Done with measure step16 out of 500
+Done with measure step17 out of 500
+Done with measure step18 out of 500
+Done with measure step19 out of 500
+Done with measure step20 out of 500
+Done with measure step21 out of 500
+Done with measure step22 out of 500
+Done with measure step23 out of 500
+Done with measure step24 out of 500
+Done with measure step25 out of 500
+Done with measure step26 out of 500
+Done with measure step27 out of 500
+Done with measure step28 out of 500
+Done with measure step29 out of 500
+Done with measure step30 out of 500
+Done with measure step31 out of 500
+Done with measure step32 out of 500
+Done with measure step33 out of 500
+Done with measure step34 out of 500
+Done with measure step35 out of 500
+Done with measure step36 out of 500
+Done with measure step37 out of 500
+Done with measure step38 out of 500
+Done with measure step39 out of 500
+Done with measure step40 out of 500
+Done with measure step41 out of 500
+Done with measure step42 out of 500
+Done with measure step43 out of 500
+Done with measure step44 out of 500
+Done with measure step45 out of 500
+Done with measure step46 out of 500
+Done with measure step47 out of 500
+Done with measure step48 out of 500
+Done with measure step49 out of 500
+Done with measure step50 out of 500
+Done with measure step51 out of 500
+Done with measure step52 out of 500
+Done with measure step53 out of 500
+Done with measure step54 out of 500
+Done with measure step55 out of 500
+Done with measure step56 out of 500
+Done with measure step57 out of 500
+Done with measure step58 out of 500
+Done with measure step59 out of 500
+Done with measure step60 out of 500
+Done with measure step61 out of 500
+Done with measure step62 out of 500
+Done with measure step63 out of 500
+Done with measure step64 out of 500
+Done with measure step65 out of 500
+Done with measure step66 out of 500
+Done with measure step67 out of 500
+Done with measure step68 out of 500
+Done with measure step69 out of 500
+Done with measure step70 out of 500
+Done with measure step71 out of 500
+Done with measure step72 out of 500
+Done with measure step73 out of 500
+Done with measure step74 out of 500
+Done with measure step75 out of 500
+Done with measure step76 out of 500
+Done with measure step77 out of 500
+Done with measure step78 out of 500
+Done with measure step79 out of 500
+Done with measure step80 out of 500
+Done with measure step81 out of 500
+Done with measure step82 out of 500
+Done with measure step83 out of 500
+Done with measure step84 out of 500
+Done with measure step85 out of 500
+Done with measure step86 out of 500
+Done with measure step87 out of 500
+Done with measure step88 out of 500
+Done with measure step89 out of 500
+Done with measure step90 out of 500
+Done with measure step91 out of 500
+Done with measure step92 out of 500
+Done with measure step93 out of 500
+Done with measure step94 out of 500
+Done with measure step95 out of 500
+Done with measure step96 out of 500
+Done with measure step97 out of 500
+Done with measure step98 out of 500
+Done with measure step99 out of 500
+Done with measure step100 out of 500
+Done with measure step101 out of 500
+Done with measure step102 out of 500
+Done with measure step103 out of 500
+Done with measure step104 out of 500
+Done with measure step105 out of 500
+Done with measure step106 out of 500
+Done with measure step107 out of 500
+Done with measure step108 out of 500
+Done with measure step109 out of 500
+Done with measure step110 out of 500
+Done with measure step111 out of 500
+Done with measure step112 out of 500
+Done with measure step113 out of 500
+Done with measure step114 out of 500
+Done with measure step115 out of 500
+Done with measure step116 out of 500
+Done with measure step117 out of 500
+Done with measure step118 out of 500
+Done with measure step119 out of 500
+Done with measure step120 out of 500
+Done with measure step121 out of 500
+Done with measure step122 out of 500
+Done with measure step123 out of 500
+Done with measure step124 out of 500
+Done with measure step125 out of 500
+Done with measure step126 out of 500
+Done with measure step127 out of 500
+Done with measure step128 out of 500
+Done with measure step129 out of 500
+Done with measure step130 out of 500
+Done with measure step131 out of 500
+Done with measure step132 out of 500
+Done with measure step133 out of 500
+Done with measure step134 out of 500
+Done with measure step135 out of 500
+Done with measure step136 out of 500
+Done with measure step137 out of 500
+Done with measure step138 out of 500
+Done with measure step139 out of 500
+Done with measure step140 out of 500
+Done with measure step141 out of 500
+Done with measure step142 out of 500
+Done with measure step143 out of 500
+Done with measure step144 out of 500
+Done with measure step145 out of 500
+Done with measure step146 out of 500
+Done with measure step147 out of 500
+Done with measure step148 out of 500
+Done with measure step149 out of 500
+Done with measure step150 out of 500
+Done with measure step151 out of 500
+Done with measure step152 out of 500
+Done with measure step153 out of 500
+Done with measure step154 out of 500
+Done with measure step155 out of 500
+Done with measure step156 out of 500
+Done with measure step157 out of 500
+Done with measure step158 out of 500
+Done with measure step159 out of 500
+Done with measure step160 out of 500
+Done with measure step161 out of 500
+Done with measure step162 out of 500
+Done with measure step163 out of 500
+Done with measure step164 out of 500
+Done with measure step165 out of 500
+Done with measure step166 out of 500
+Done with measure step167 out of 500
+Done with measure step168 out of 500
+Done with measure step169 out of 500
+Done with measure step170 out of 500
+Done with measure step171 out of 500
+Done with measure step172 out of 500
+Done with measure step173 out of 500
+Done with measure step174 out of 500
+Done with measure step175 out of 500
+Done with measure step176 out of 500
+Done with measure step177 out of 500
+Done with measure step178 out of 500
+Done with measure step179 out of 500
+Done with measure step180 out of 500
+Done with measure step181 out of 500
+Done with measure step182 out of 500
+Done with measure step183 out of 500
+Done with measure step184 out of 500
+Done with measure step185 out of 500
+Done with measure step186 out of 500
+Done with measure step187 out of 500
+Done with measure step188 out of 500
+Done with measure step189 out of 500
+Done with measure step190 out of 500
+Done with measure step191 out of 500
+Done with measure step192 out of 500
+Done with measure step193 out of 500
+Done with measure step194 out of 500
+Done with measure step195 out of 500
+Done with measure step196 out of 500
+Done with measure step197 out of 500
+Done with measure step198 out of 500
+Done with measure step199 out of 500
+Done with measure step200 out of 500
+Done with measure step201 out of 500
+Done with measure step202 out of 500
+Done with measure step203 out of 500
+Done with measure step204 out of 500
+Done with measure step205 out of 500
+Done with measure step206 out of 500
+Done with measure step207 out of 500
+Done with measure step208 out of 500
+Done with measure step209 out of 500
+Done with measure step210 out of 500
+Done with measure step211 out of 500
+Done with measure step212 out of 500
+Done with measure step213 out of 500
+Done with measure step214 out of 500
+Done with measure step215 out of 500
+Done with measure step216 out of 500
+Done with measure step217 out of 500
+Done with measure step218 out of 500
+Done with measure step219 out of 500
+Done with measure step220 out of 500
+Done with measure step221 out of 500
+Done with measure step222 out of 500
+Done with measure step223 out of 500
+Done with measure step224 out of 500
+Done with measure step225 out of 500
+Done with measure step226 out of 500
+Done with measure step227 out of 500
+Done with measure step228 out of 500
+Done with measure step229 out of 500
+Done with measure step230 out of 500
+Done with measure step231 out of 500
+Done with measure step232 out of 500
+Done with measure step233 out of 500
+Done with measure step234 out of 500
+Done with measure step235 out of 500
+Done with measure step236 out of 500
+Done with measure step237 out of 500
+Done with measure step238 out of 500
+Done with measure step239 out of 500
+Done with measure step240 out of 500
+Done with measure step241 out of 500
+Done with measure step242 out of 500
+Done with measure step243 out of 500
+Done with measure step244 out of 500
+Done with measure step245 out of 500
+Done with measure step246 out of 500
+Done with measure step247 out of 500
+Done with measure step248 out of 500
+Done with measure step249 out of 500
+Done with measure step250 out of 500
+Done with measure step251 out of 500
+Done with measure step252 out of 500
+Done with measure step253 out of 500
+Done with measure step254 out of 500
+Done with measure step255 out of 500
+Done with measure step256 out of 500
+Done with measure step257 out of 500
+Done with measure step258 out of 500
+Done with measure step259 out of 500
+Done with measure step260 out of 500
+Done with measure step261 out of 500
+Done with measure step262 out of 500
+Done with measure step263 out of 500
+Done with measure step264 out of 500
+Done with measure step265 out of 500
+Done with measure step266 out of 500
+Done with measure step267 out of 500
+Done with measure step268 out of 500
+Done with measure step269 out of 500
+Done with measure step270 out of 500
+Done with measure step271 out of 500
+Done with measure step272 out of 500
+Done with measure step273 out of 500
+Done with measure step274 out of 500
+Done with measure step275 out of 500
+Done with measure step276 out of 500
+Done with measure step277 out of 500
+Done with measure step278 out of 500
+Done with measure step279 out of 500
+Done with measure step280 out of 500
+Done with measure step281 out of 500
+Done with measure step282 out of 500
+Done with measure step283 out of 500
+Done with measure step284 out of 500
+Done with measure step285 out of 500
+Done with measure step286 out of 500
+Done with measure step287 out of 500
+Done with measure step288 out of 500
+Done with measure step289 out of 500
+Done with measure step290 out of 500
+Done with measure step291 out of 500
+Done with measure step292 out of 500
+Done with measure step293 out of 500
+Done with measure step294 out of 500
+Done with measure step295 out of 500
+Done with measure step296 out of 500
+Done with measure step297 out of 500
+Done with measure step298 out of 500
+Done with measure step299 out of 500
+Done with measure step300 out of 500
+Done with measure step301 out of 500
+Done with measure step302 out of 500
+Done with measure step303 out of 500
+Done with measure step304 out of 500
+Done with measure step305 out of 500
+Done with measure step306 out of 500
+Done with measure step307 out of 500
+Done with measure step308 out of 500
+Done with measure step309 out of 500
+Done with measure step310 out of 500
+Done with measure step311 out of 500
+Done with measure step312 out of 500
+Done with measure step313 out of 500
+Done with measure step314 out of 500
+Done with measure step315 out of 500
+Done with measure step316 out of 500
+Done with measure step317 out of 500
+Done with measure step318 out of 500
+Done with measure step319 out of 500
+Done with measure step320 out of 500
+Done with measure step321 out of 500
+Done with measure step322 out of 500
+Done with measure step323 out of 500
+Done with measure step324 out of 500
+Done with measure step325 out of 500
+Done with measure step326 out of 500
+Done with measure step327 out of 500
+Done with measure step328 out of 500
+Done with measure step329 out of 500
+Done with measure step330 out of 500
+Done with measure step331 out of 500
+Done with measure step332 out of 500
+Done with measure step333 out of 500
+Done with measure step334 out of 500
+Done with measure step335 out of 500
+Done with measure step336 out of 500
+Done with measure step337 out of 500
+Done with measure step338 out of 500
+Done with measure step339 out of 500
+Done with measure step340 out of 500
+Done with measure step341 out of 500
+Done with measure step342 out of 500
+Done with measure step343 out of 500
+Done with measure step344 out of 500
+Done with measure step345 out of 500
+Done with measure step346 out of 500
+Done with measure step347 out of 500
+Done with measure step348 out of 500
+Done with measure step349 out of 500
+Done with measure step350 out of 500
+Done with measure step351 out of 500
+Done with measure step352 out of 500
+Done with measure step353 out of 500
+Done with measure step354 out of 500
+Done with measure step355 out of 500
+Done with measure step356 out of 500
+Done with measure step357 out of 500
+Done with measure step358 out of 500
+Done with measure step359 out of 500
+Done with measure step360 out of 500
+Done with measure step361 out of 500
+Done with measure step362 out of 500
+Done with measure step363 out of 500
+Done with measure step364 out of 500
+Done with measure step365 out of 500
+Done with measure step366 out of 500
+Done with measure step367 out of 500
+Done with measure step368 out of 500
+Done with measure step369 out of 500
+Done with measure step370 out of 500
+Done with measure step371 out of 500
+Done with measure step372 out of 500
+Done with measure step373 out of 500
+Done with measure step374 out of 500
+Done with measure step375 out of 500
+Done with measure step376 out of 500
+Done with measure step377 out of 500
+Done with measure step378 out of 500
+Done with measure step379 out of 500
+Done with measure step380 out of 500
+Done with measure step381 out of 500
+Done with measure step382 out of 500
+Done with measure step383 out of 500
+Done with measure step384 out of 500
+Done with measure step385 out of 500
+Done with measure step386 out of 500
+Done with measure step387 out of 500
+Done with measure step388 out of 500
+Done with measure step389 out of 500
+Done with measure step390 out of 500
+Done with measure step391 out of 500
+Done with measure step392 out of 500
+Done with measure step393 out of 500
+Done with measure step394 out of 500
+Done with measure step395 out of 500
+Done with measure step396 out of 500
+Done with measure step397 out of 500
+Done with measure step398 out of 500
+Done with measure step399 out of 500
+Done with measure step400 out of 500
+Done with measure step401 out of 500
+Done with measure step402 out of 500
+Done with measure step403 out of 500
+Done with measure step404 out of 500
+Done with measure step405 out of 500
+Done with measure step406 out of 500
+Done with measure step407 out of 500
+Done with measure step408 out of 500
+Done with measure step409 out of 500
+Done with measure step410 out of 500
+Done with measure step411 out of 500
+Done with measure step412 out of 500
+Done with measure step413 out of 500
+Done with measure step414 out of 500
+Done with measure step415 out of 500
+Done with measure step416 out of 500
+Done with measure step417 out of 500
+Done with measure step418 out of 500
+Done with measure step419 out of 500
+Done with measure step420 out of 500
+Done with measure step421 out of 500
+Done with measure step422 out of 500
+Done with measure step423 out of 500
+Done with measure step424 out of 500
+Done with measure step425 out of 500
+Done with measure step426 out of 500
+Done with measure step427 out of 500
+Done with measure step428 out of 500
+Done with measure step429 out of 500
+Done with measure step430 out of 500
+Done with measure step431 out of 500
+Done with measure step432 out of 500
+Done with measure step433 out of 500
+Done with measure step434 out of 500
+Done with measure step435 out of 500
+Done with measure step436 out of 500
+Done with measure step437 out of 500
+Done with measure step438 out of 500
+Done with measure step439 out of 500
+Done with measure step440 out of 500
+Done with measure step441 out of 500
+Done with measure step442 out of 500
+Done with measure step443 out of 500
+Done with measure step444 out of 500
+Done with measure step445 out of 500
+Done with measure step446 out of 500
+Done with measure step447 out of 500
+Done with measure step448 out of 500
+Done with measure step449 out of 500
+Done with measure step450 out of 500
+Done with measure step451 out of 500
+Done with measure step452 out of 500
+Done with measure step453 out of 500
+Done with measure step454 out of 500
+Done with measure step455 out of 500
+Done with measure step456 out of 500
+Done with measure step457 out of 500
+Done with measure step458 out of 500
+Done with measure step459 out of 500
+Done with measure step460 out of 500
+Done with measure step461 out of 500
+Done with measure step462 out of 500
+Done with measure step463 out of 500
+Done with measure step464 out of 500
+Done with measure step465 out of 500
+Done with measure step466 out of 500
+Done with measure step467 out of 500
+Done with measure step468 out of 500
+Done with measure step469 out of 500
+Done with measure step470 out of 500
+Done with measure step471 out of 500
+Done with measure step472 out of 500
+Done with measure step473 out of 500
+Done with measure step474 out of 500
+Done with measure step475 out of 500
+Done with measure step476 out of 500
+Done with measure step477 out of 500
+Done with measure step478 out of 500
+Done with measure step479 out of 500
+Done with measure step480 out of 500
+Done with measure step481 out of 500
+Done with measure step482 out of 500
+Done with measure step483 out of 500
+Done with measure step484 out of 500
+Done with measure step485 out of 500
+Done with measure step486 out of 500
+Done with measure step487 out of 500
+Done with measure step488 out of 500
+Done with measure step489 out of 500
+Done with measure step490 out of 500
+Done with measure step491 out of 500
+Done with measure step492 out of 500
+Done with measure step493 out of 500
+Done with measure step494 out of 500
+Done with measure step495 out of 500
+Done with measure step496 out of 500
+Done with measure step497 out of 500
+Done with measure step498 out of 500
+Done with measure step499 out of 500
+
+Done with measurements
+in 31.124825954437256 seconds
+number of PT steps 50000
+time per step (full PT + Metro)0.0006224965190887451
+time per step per temp (full PT + Metro)6.224965190887452e-05
+
+
+Done with exporting data
