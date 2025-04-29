@@ -1,0 +1,24 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Algebraic order in the 2D XY model}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Average magnetization}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Correlation functions}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Vortices and entropic argument}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Renormalization-group analysis}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Mapping to the Coulomb gas}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}RG flow equations}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Nelson-Kosterlitz jump}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Correlation Length and Specific Heat}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Monte-Carlo approach}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Local updates: Metropolis}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Global updates: Wolff}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Observables and spin stiffness}{14}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Temperature sweep}{16}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Statistical analysis: Jackknife method}{16}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Numerical evidence for the KT transition}{16}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Results}{17}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Universality of the mechanism}{18}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Superfluid He-4}{18}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Two-dimensional melting and KTHNY theory}{19}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Other settings}{21}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Outlook}{21}{section.6}%
+\contentsline {section}{\numberline {A}Derivation of the RG equations from the Coulomb gas picture}{22}{appendix.A}%
