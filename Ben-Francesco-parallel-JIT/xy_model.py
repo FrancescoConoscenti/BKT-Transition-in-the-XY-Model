@@ -891,14 +891,33 @@ def main() -> None:
     
     # Run simulations for each lattice size
     for L in args.lattice_sizes:
-        # Create simulation parameters
+        # Determine L-dependent sweep counts
+        # Treat args values as baseline for L=10 (or smallest L)
+        base_thermalize = args.thermalize
+        base_sweeps = args.sweeps
+
+        if L <= 10:
+            scale_factor = 1
+        elif L <= 20:
+            scale_factor = 2
+        elif L <= 30:
+            scale_factor = 5
+        else: # L > 30 (e.g., L=40)
+            scale_factor = 10
+
+        current_thermalize_sweeps = base_thermalize * scale_factor
+        current_sweeps = base_sweeps * scale_factor
+
+        logger.info(f"L={L}: Using {current_thermalize_sweeps} thermalization sweeps and {current_sweeps} measurement sweeps.")
+
+        # Create simulation parameters with adjusted sweeps
         sim_params = SimulationParameters(
             L=L,
             T_min=args.t_min,
             T_max=args.t_max,
             num_points=args.num_points,
-            sweeps=args.sweeps,
-            thermalize_sweeps=args.thermalize,
+            sweeps=current_sweeps, # Use adjusted value
+            thermalize_sweeps=current_thermalize_sweeps, # Use adjusted value
             J=args.j
         )
         
