@@ -517,7 +517,7 @@ def run_single_temperature(params: Tuple[SimulationParameters, float, int, str])
     thermal_desc = f"L={L}, T={temperature:.4f} ({algorithm}): Thermalization"
     if algorithm == 'metropolis':
         for _ in tqdm(range(thermalize_sweeps), desc=thermal_desc, leave=False, disable=temp_idx > 0):
-        model.metropolis_step(beta)
+            model.metropolis_step(beta)
     elif algorithm == 'wolff':
         for _ in tqdm(range(thermalize_sweeps), desc=thermal_desc, leave=False, disable=temp_idx > 0):
             model.wolff_sweep(beta)
@@ -538,7 +538,7 @@ def run_single_temperature(params: Tuple[SimulationParameters, float, int, str])
     collection_desc = f"L={L}, T={temperature:.4f} ({algorithm}): Data collection"
     for sweep_num in tqdm(range(sweeps), desc=collection_desc, leave=False, disable=temp_idx > 0):
         if algorithm == 'metropolis':
-        model.metropolis_step(beta)
+            model.metropolis_step(beta)
         elif algorithm == 'wolff':
             model.wolff_sweep(beta)
         
@@ -909,7 +909,7 @@ def visualize_plots(results_dict: Dict[int, SimulationResults], output_dir: str,
     for L in lattice_sizes:
         results = results_dict[L]
         if results.T_BKT is not None and not np.isnan(results.T_BKT):
-        textstr += f"L = {L}: T_BKT = {results.T_BKT:.4f}\n"
+            textstr += f"L = {L}: T_BKT = {results.T_BKT:.4f}\n"
             valid_tbkt_count += 1
         else:
             textstr += f"L = {L}: T_BKT = NaN\n"
@@ -1174,6 +1174,12 @@ def main() -> None:
     # A proper T_BKT error requires error propagation from stiffness fit
     T_bkt_errors = np.array([results_dict[L].stiffness_errors[np.abs(results_dict[L].temperatures - results_dict[L].T_BKT).argmin()] if results_dict[L].T_BKT is not None and not np.isnan(results_dict[L].T_BKT) else np.nan for L in L_values])
 
+    # --- Debug: Print calculated T_BKT(L) values --- 
+    print("\nCalculated T_BKT(L) values before FSS fitting:")
+    for l_val, t_val in zip(L_values, T_bkt_values):
+        print(f"  L = {l_val:2d}: T_BKT = {t_val}")
+    print("----------------------------------------------")
+
     # Filter out NaN values for fitting
     valid_mask = ~np.isnan(T_bkt_values) & (L_values > 1) # Ensure L > 1 for log
     if np.sum(valid_mask) >= 3: # Need at least 3 points to fit 2 parameters reliably
@@ -1271,22 +1277,22 @@ def visualize_finite_size_scaling(L_values: np.ndarray, T_bkt_values: np.ndarray
     # Plot data points with error bars if available
     if T_err_plot is not None:
          ax.errorbar(x_plot, T_plot, yerr=T_err_plot, fmt='o', markersize=5,
-                     capsize=3, label='Simulation Data $T_{BKT}(L)$')
+                     capsize=3, label='Simulation Data $T_{cross}(L)$')
     else:
-        ax.plot(x_plot, T_plot, 'o', markersize=5, label='Simulation Data $T_{BKT}(L)$')
+        ax.plot(x_plot, T_plot, 'o', markersize=5, label='Simulation Data $T_{cross}(L)$')
         
     # Plot the linear fit
     ax.plot(x_fit_line, T_fit_line, 'r--', 
-            label=f'Fit: $T = T_\infty + a / (\ln L)^2$\\\\ $T_\infty = {T_inf:.4f} \pm {T_inf_err:.4f}$')
+            label=f'Fit: $T = T_\infty + a / (\\ln L)^2$ ($T_\infty = {T_inf:.4f} \\pm {T_inf_err:.4f}$)\'')
 
     ax.set_xlabel(r'$1 / (\ln L)^2$', fontsize=12)
-    ax.set_ylabel(r'$T_{BKT}(L)$', fontsize=12)
-    ax.set_title(f'Finite-Size Scaling of $T_{BKT}$ ({algorithm.capitalize()} Algorithm)', fontsize=14)
+    ax.set_ylabel(r'$T_{cross}(L)$', fontsize=12)
+    ax.set_title(f'Finite-Size Scaling of Crossing Temperature ({algorithm.capitalize()} Algorithm)', fontsize=14)
     ax.legend(fontsize=10)
     ax.grid(True, alpha=0.5)
 
     # Add text for extrapolated value near y-intercept
-    ax.text(0.05, 0.95, f'Extrapolated $T_{{BKT}}(\infty) = {T_inf:.4f} \pm {T_inf_err:.4f}$',
+    ax.text(0.05, 0.95, f'Extrapolated $T(\infty) = {T_inf:.4f} \\pm {T_inf_err:.4f}$',
             transform=ax.transAxes, fontsize=10, verticalalignment='top', 
             bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
