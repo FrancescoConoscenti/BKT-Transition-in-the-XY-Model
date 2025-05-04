@@ -1,0 +1,20 @@
+
+Thermalization for XY model
+Linear size of the system L=16
+Temperature T=0.95
+Interaction strength J=1.0
+Pre-thermalization steps: 500
+Thermalization steps: 1000
+Number of cores: 8
+
+Starting pre-thermalization
+Optimal iterations per therm step: 3
+Done with pre-thermalization in 2.72 seconds
+
+Starting main thermalization
+
+Done with thermalization
+in 8.32 seconds
+Final energy: -366.532761944376
+Energy per site: -1.431769
+Thermalized configuration saved to ./configL16_T09500.data

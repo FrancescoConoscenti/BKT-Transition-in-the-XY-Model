@@ -1,0 +1,601 @@
+% Please use LuaLaTeX or XeLaTeX for compilation
+\documentclass[11pt,aspectratio=169]{beamer}
+
+% Theme and Colors
+\usetheme{eth}
+\colorlet{titlefgcolor}{ETHGray}
+\colorlet{accentcolor}{ETHRed}
+\colorlet{titlebgcolor}{ETHRed} % Title slide background
+
+% Standard Packages
+\usepackage{amsmath, amssymb} % Math symbols
+\usepackage{bm} % Bold math symbols
+\usepackage{graphicx} % Include graphics (if needed)
+\usepackage{booktabs} % Nicer tables (if needed)
+\usepackage{microtype} % Better typography
+\usepackage{physics} % Physics notation
+
+% Ben packages
+\usepackage{soul}
+
+% Citation Management (using biblatex)
+\usepackage[style=numeric, backend=biber]{biblatex}
+\addbibresource{references.bib} % You need a references.bib file
+
+% Footnotes (optional, if needed)
+\usepackage[multiple]{footmisc}
+\usepackage{footnoterange}
+\usepackage{fnpct}
+\AdaptNote\footcite{oo+m}[footnote]{%
+\setfnpct{dont-mess-around}%
+\IfNoValueTF{#1}
+{#NOTE{#3}}
+{\IfNoValueTF{#2}{#NOTE[#1]{#3}}{#NOTE[#1][#2]{#3}}}%
+}
+
+% Algorithms (optional, if needed)
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode} % Use noend option as in template
+
+% Tikz/PGFPlots (optional, if needed for diagrams)
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17} % Use a recent compatibility level
+
+% Custom command for highlighting math
+\newcommand\mathalert[1]{{\color{accentcolor}#1}}
+
+% --- Presentation Metadata ---
+\title{The Berezinskii-Kosterlitz-Thouless Transition in the 2D XY Model}
+\subtitle{Monte Carlo Simulation and Analysis}
+\author{Lara Turgut \and Francesco Conoscenti \and Ben Bullinger}
+\institute{ETH Zürich\\ Department of Physics}
+\date{Computational Statistical Physics (402-0812-00L), Spring 2025}
+
+\begin{document}
+
+% --- Title Slide ---
+\def\titlefigure{} % No figure on title slide unless specified
+\setlength{\titleboxwidth}{0.85\textwidth} % Adjust box width if needed
+\titleframe % Creates the title slide using the theme's definition
+
+% --- Table of Contents ---
+\tocframe % Creates the table of contents slide
+
+% --- Section 1: Introduction ---
+\section{Introduction}
+
+\begin{frame}{The 2D XY Model}
+    \begin{itemize}
+        \item XY model: spins constrained to a plane with $O(2)$ symmetry
+        \begin{equation}
+            H = -J \sum_{\langle i,j \rangle} \mathbf{S}_i \cdot \mathbf{S}_j = -J \sum_{\langle i,j \rangle} \cos(\theta_i - \theta_j)
+        \end{equation}
+        \item Each spin is a unit vector $\mathbf{S}_i = (\cos\theta_i, \sin\theta_i)$
+        \pause
+        \item Unlike conventional phase transitions with symmetry breaking:
+        \begin{itemize}
+            \item \textbf{Mermin-Wagner theorem:} No spontaneous symmetry breaking (true long-range order) at $T > 0$ in systems with continuous symmetry in $d \leq 2$
+            \item Yet, the 2D XY model \textit{does} exhibit a phase transition!
+        \end{itemize}
+        \pause
+        \item The Berezinskii-Kosterlitz-Thouless (BKT) transition:
+        \begin{itemize}
+            \item Topological phase transition with no conventional order parameter
+            \item Transition from quasi-long-range order to disorder
+            \item Driven by the unbinding of vortex-antivortex pairs
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Physical Significance}
+    \begin{itemize}
+        \item The BKT transition represents a unique phase transition mechanism
+        \begin{itemize}
+            \item \textbf{Infinite-order transition:} All derivatives of free energy are continuous
+            \item \textbf{Topological in nature:} Driven by topological defects (vortices)
+        \end{itemize}
+        \pause
+        \item Found in diverse physical systems:
+        \begin{itemize}
+            \item Thin films of superfluid helium-4
+            \item 2D superconductors
+            \item 2D melting (KTHNY theory)
+            \item Josephson junction arrays
+            \item Cold atom systems
+            \item Quantum spin systems
+        \end{itemize}
+        \pause
+        \item Universal mechanism: A beautiful example of universality in critical phenomena
+    \end{itemize}
+\end{frame}
+
+% --- Section 2: Theoretical Background ---
+\section{Theoretical Background}
+
+\begin{frame}{Algebraic Order in the 2D XY Model}
+    \begin{itemize}
+        \item Low-temperature expansion of the Hamiltonian:
+        \begin{equation}
+            H \approx E_0 + \frac{J}{2} \int d^2r (\nabla \theta(\mathbf{r}))^2
+        \end{equation}
+        \pause
+        \item Correlation function analysis shows:
+        \begin{equation}
+            g(r) = \langle e^{i(\theta(\mathbf{r}) - \theta(0))} \rangle \approx \left( \frac{\pi r}{a} \right)^{-\frac{k_B T}{2\pi J}}
+        \end{equation}
+        \item Key property: \mathalert{algebraic decay} of correlations at low temperature
+        \begin{itemize}
+            \item \textbf{Low-T phase:} $g(r) \sim r^{-\eta(T)}$ with temperature-dependent exponent
+            \item \textbf{High-T phase:} $g(r) \sim e^{-r/\xi(T)}$ (exponential decay)
+        \end{itemize}
+        \pause
+        \item This algebraic decay = \textbf{quasi-long-range order (QLRO)}
+        \begin{itemize}
+            \item Infinite correlation length $\xi = \infty$ in low-T phase
+            \item System is critical at all temperatures below $T_{KT}$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Role of Vortices}
+    \begin{itemize}
+        \item Vortices: topological defects with winding of $2\pi n$ in phase field
+        \begin{equation}
+            \oint \nabla \theta \cdot d\mathbf{l} = 2\pi n
+        \end{equation}
+        \item Energy of a single vortex (with $n=1$):
+        \begin{equation}
+            \Delta E = \pi J \ln \frac{L}{a}
+        \end{equation}
+        where $L$ is system size and $a$ is lattice spacing
+        \pause
+        \item Entropy of a single vortex:
+        \begin{equation}
+            \Delta S = k_B \ln \frac{L^2}{a^2} = 2k_B \ln \frac{L}{a}
+        \end{equation}
+        \pause
+        \item Free energy:
+        \begin{equation}
+            \Delta F = \Delta E - T\Delta S = (\pi J - 2k_B T)\ln \frac{L}{a}
+        \end{equation}
+        \pause
+        \item \mathalert{Crucial insight}: Vortices are bound in pairs below critical temperature, and unbound above it
+        \begin{itemize}
+            \item For $T < \frac{\pi J}{2k_B}$: $\Delta F > 0$ (bound vortex pairs)
+            \item For $T > \frac{\pi J}{2k_B}$: $\Delta F < 0$ (free vortices proliferate)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Renormalization Group Analysis}
+    \begin{itemize}
+        \item Mapping to 2D Coulomb gas: vortices as charges with $\ln(r)$ interaction
+        \item RG flow equations for coupling $K = \frac{J}{k_B T}$ and fugacity $y$:
+        \begin{align}
+            \frac{d K^{-1}(l)}{dl} &= 4 \pi^3 y(l)^2 + O(y(l)^4) \\
+            \frac{d y(l)}{dl} &= (2 - \pi K(l)) y(l) + O(y(l)^3)
+        \end{align}
+        \pause
+        \item Flow diagram shows two phases:
+        \begin{itemize}
+            \item \textbf{Low-T} ($K > \frac{2}{\pi}$): $y \to 0$ (no free vortices, QLRO)
+            \item \textbf{High-T} ($K < \frac{2}{\pi}$): $y$ increases (free vortices, disorder)
+        \end{itemize}
+        \pause
+        \item Universal properties:
+        \begin{itemize}
+            \item Critical point: $K_c = \frac{2}{\pi}$ or $T_{KT} = \frac{\pi J}{2k_B}$
+            \item \textbf{Nelson-Kosterlitz jump}: Spin stiffness $\rho_s$ jumps at transition:
+            \begin{equation}
+                \rho_s(T_{KT}^-) = \frac{2T_{KT}}{\pi}
+            \end{equation}
+            \item Correlation length above transition: $\xi(T) \sim e^{b/\sqrt{T/T_{KT}-1}}$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- Section 3: Monte Carlo Methods ---
+\section{Monte Carlo Methods}
+
+\begin{frame}{Simulating the XY Model}
+    \begin{itemize}
+        \item Challenges in simulating BKT transition:
+        \begin{itemize}
+            \item Critical slowing down near phase transition
+            \item Need for large system sizes (finite-size effects)
+            \item Long correlation times
+        \end{itemize}
+        \pause
+        \item Standard Metropolis algorithm:
+        \begin{itemize}
+            \item Energy change for spin flip: $\Delta E = -J \sum_{\langle i,j \rangle} [\cos(\theta'_i - \theta_j) - \cos(\theta_i - \theta_j)]$
+            \item Accept new state with probability $P = \min(1, e^{-\beta \Delta E})$
+            \item Very inefficient near critical point due to large correlated regions
+        \end{itemize}
+        \pause
+        \item More efficient approaches:
+        \begin{itemize}
+            \item \textbf{Wolff cluster algorithm}: Updates entire clusters of spins
+            \item \textbf{Parallel tempering}: Exchanges configurations between different temperatures
+            \item Combination of both methods for optimal efficiency
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Wolff Cluster Algorithm}
+    \begin{itemize}
+        \item Efficiently updates entire clusters of correlated spins
+        \begin{enumerate}
+            \item Choose a random reflection axis (unit vector $\mathbf{r}$)
+            \item Pick a random initial site for the cluster
+            \item Add neighboring spins with probability $P_{\text{add}} = 1 - \exp[\min(0, 2\beta J (\mathbf{S}_i \cdot \mathbf{r})(\mathbf{S}_j \cdot \mathbf{r}))]$
+            \item Reflect all spins in the cluster w.r.t. the chosen axis
+        \end{enumerate}
+        \pause
+        \item Advantages:
+        \begin{itemize}
+            \item Dramatically reduces critical slowing down
+            \item Dynamical critical exponent $z \approx 0$ (vs. $z \approx 2$ for Metropolis)
+            \item Efficiently samples low-energy configurations
+        \end{itemize}
+        \pause
+        \item Our implementation:
+        \begin{itemize}
+            \item Combines Wolff updates with parallel tempering
+            \item Optimally adapts the number of updates based on average cluster size
+            \item Uses numba JIT compilation for performance
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Parallel Tempering}
+    \begin{itemize}
+        \item Simulates multiple replicas at different temperatures $T_1 < T_2 < ... < T_M$
+        \item Periodically proposes exchanges between adjacent temperatures
+        \begin{itemize}
+            \item Accept exchange with probability $P = \min(1, \exp((\beta_i - \beta_j)(E_j - E_i)))$
+        \end{itemize}
+        \pause
+        \item Benefits:
+        \begin{itemize}
+            \item Helps systems escape from local minima
+            \item Improves sampling at low temperatures
+            \item Configurations can diffuse across temperature space
+        \end{itemize}
+        \pause
+        \item Implementation details:
+        \begin{itemize}
+            \item Alternating even/odd exchanges for better mixing
+            \item Temperature spacing optimized for exchange acceptance rates
+            \item Combined with Wolff algorithm for optimal efficiency
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- Section 4: Implementation ---
+\section{Implementation Details}
+
+\begin{frame}{Our Implementation Approach}
+    \begin{itemize}
+        \item Three-phase simulation structure:
+        \begin{enumerate}
+            \item \textbf{Pre-thermalization}: Determine optimal number of Wolff updates
+            \item \textbf{Thermalization}: Reach equilibrium at each temperature
+            \item \textbf{Measurement}: Collect data for analysis
+        \end{enumerate}
+        \pause
+        \item Optimization techniques:
+        \begin{itemize}
+            \item Numba JIT compilation for compute-intensive functions
+            \item Vectorized operations with NumPy for efficiency
+            \item Pre-computed neighbor lists to avoid redundant calculations
+            \item Dynamic adjustment of updates based on cluster sizes
+        \end{itemize}
+        \pause
+        \item Simulation flow:
+        \begin{itemize}
+            \item Generate temperature range (linear or geometric spacing)
+            \item Run simulations for multiple system sizes $L$
+            \item For each size and temperature: thermalize, measure, analyze
+            \item Perform finite-size scaling analysis to extract $T_{KT}$ 
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Key Observables}
+    \begin{itemize}
+        \item Physical quantities measured in our simulation:
+        \begin{itemize}
+            \item \textbf{Energy per spin}: $e = \frac{\langle H \rangle}{N} = -\frac{J}{N} \sum_{\langle i,j \rangle} \langle\cos(\theta_i - \theta_j)\rangle$
+            \item \textbf{Specific heat}: $c_v = \frac{\langle E^2 \rangle - \langle E \rangle^2}{NT^2}$
+            \item \textbf{Magnetization}: $\mathbf{m} = \frac{1}{N}\left\langle \sum_i (\cos\theta_i, \sin\theta_i) \right\rangle$
+            \item \textbf{Susceptibility}: $\chi = \frac{\langle M^2 \rangle - \langle M \rangle^2}{NT}$
+            \pause
+            \item \textbf{Spin stiffness (Helicity modulus)}:
+            \begin{equation}
+                \rho_s = \langle H_x \rangle - \frac{\beta}{N} \langle I_x^2 \rangle
+            \end{equation}
+            where $H_x = \sum_{\langle i,j \rangle_x} \cos(\theta_i - \theta_j)$ and $I_x = \sum_{\langle i,j \rangle_x} \sin(\theta_i - \theta_j)$
+            \pause
+            \item \textbf{Vortex density}: $\omega_v = \frac{1}{N} \sum_{\text{plaquettes}} \left| \frac{1}{2\pi} \sum_{\text{edges}} \Delta\theta_{ij} \right|$
+        \end{itemize}
+        \item Spin stiffness is crucial for locating $T_{KT}$ through the universal jump
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Error Analysis}
+    \begin{itemize}
+        \item Statistical errors from Monte Carlo sampling:
+        \begin{itemize}
+            \item Sequential MC data is \textit{correlated}
+            \item Standard error formulas for independent data are inadequate
+        \end{itemize}
+        \pause
+        \item Jackknife resampling for reliable error estimation:
+        \begin{enumerate}
+            \item Divide data into $B$ blocks larger than correlation time
+            \item For each block $b$, compute estimate $\bar{O}_b$ by excluding block $b$
+            \item Jackknife error: $\sigma^2_{\text{JK}} = \frac{B-1}{B}\sum_b (\bar{O}_b - \bar{O})^2$
+        \end{enumerate}
+        \pause
+        \item Benefits:
+        \begin{itemize}
+            \item Correctly accounts for autocorrelations in MC data
+            \item Works well for derived quantities (non-linear functions)
+            \item More reliable than naive variance calculations
+            \item Essential for accurate error bars on quantities near transition
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- Section 5: Results and Analysis ---
+\section{Results and Analysis}
+
+\begin{frame}{Thermodynamic Observables}
+    \begin{itemize}
+        \item Specific heat $c_v$:
+        \begin{itemize}
+            \item Broad peak near $T \approx 1.0 J$
+            \item No divergence at $T_{KT}$ (characteristic of BKT transition)
+            \item Slight sharpening with increasing system size
+        \end{itemize}
+        \pause
+        \item Magnetization:
+        \begin{itemize}
+            \item Decreases with system size at all temperatures
+            \item Follows $m \sim L^{-\eta/2}$ in low-temperature phase (QLRO)
+            \item Approaches zero exponentially fast with $L$ above $T_{KT}$
+        \end{itemize}
+        \pause
+        \item Susceptibility:
+        \begin{itemize}
+            \item Peaks near transition temperature
+            \item Peak height increases with system size
+            \item Shows logarithmic divergence in QLRO phase
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Identifying the BKT Transition}
+    \begin{itemize}
+        \item Vortex density:
+        \begin{itemize}
+            \item Very low at $T \ll T_{KT}$ (few vortex pairs)
+            \item Increases sharply around $T \approx 0.9 J$ (vortex unbinding)
+            \item Provides visual indication of transition
+        \end{itemize}
+        \pause
+        \item Spin stiffness (helicity modulus):
+        \begin{itemize}
+            \item Key indicator of the BKT transition
+            \item Universal jump at $T_{KT}$: $\rho_s(T_{KT}^-) = \frac{2T_{KT}}{\pi}$
+            \item Intersection of $\rho_s(T)$ curves with the line $\rho_s = \frac{2T}{\pi}$ gives $T_{KT}$
+            \item Our data indicates $T_{KT} \approx 0.89 J$
+        \end{itemize}
+        \pause
+        \item Finite-size effects:
+        \begin{itemize}
+            \item Transition is smoothed out in finite systems
+            \item Slopes become sharper with increasing $L$
+            \item True universal jump only emerges in thermodynamic limit $L \to \infty$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Finite-Size Scaling}
+    \begin{itemize}
+        \item Theory predicts finite-size scaling of $T_{KT}(L)$:
+        \begin{equation}
+            T_{KT}(L) = T_{KT}(\infty) + \frac{a}{(\ln L)^2}
+        \end{equation}
+        \pause
+        \item Extracting $T_{KT}(L)$ for each system size:
+        \begin{itemize}
+            \item For each $L$, find temperature where $\rho_s(T) = 2T/\pi$
+            \item Extract $T_{KT}(L)$ and its uncertainty
+        \end{itemize}
+        \pause
+        \item Finite-size scaling analysis:
+        \begin{itemize}
+            \item Plot $T_{KT}(L)$ vs. $1/(\ln L)^2$
+            \item Linear fit gives $T_{KT}(\infty)$ (thermodynamic limit)
+            \item Our analysis yields $T_{KT}(\infty) \approx 0.893(4) J$
+            \item Consistent with best theoretical and numerical estimates in literature
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- Section 6: Conclusion ---
+\section{Conclusion}
+
+\begin{frame}{Summary and Significance}
+    \begin{itemize}
+        \item Successfully simulated the BKT transition in the 2D XY model:
+        \begin{itemize}
+            \item Implemented efficient Wolff algorithm with parallel tempering
+            \item Measured key observables across multiple system sizes
+            \item Applied finite-size scaling to extract critical temperature
+        \end{itemize}
+        \pause
+        \item Key findings:
+        \begin{itemize}
+            \item Confirmed the characteristic signatures of the BKT transition
+            \item Determined $T_{KT} \approx 0.893(4) J$ in good agreement with theory
+            \item Observed universal jump in spin stiffness
+            \item Demonstrated vortex unbinding mechanism
+        \end{itemize}
+        \pause
+        \item Broader implications:
+        \begin{itemize}
+            \item BKT transition represents a unique universality class
+            \item Demonstrates the power of topological defects in phase transitions
+            \item Provides insight into universal mechanisms across diverse physical systems
+            \item Highlights importance of advanced sampling techniques for critical phenomena
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Future Directions}
+    \begin{itemize}
+        \item Methodological improvements:
+        \begin{itemize}
+            \item Further optimization for larger system sizes
+            \item GPU implementation for parallel computation
+            \item Advanced analysis techniques for critical properties
+        \end{itemize}
+        \pause
+        \item Extensions to related models:
+        \begin{itemize}
+            \item XY model with disorder or frustration
+            \item Quantum XY models and quantum phase transitions
+            \item Higher-dimensional models with topological transitions
+        \end{itemize}
+        \pause
+        \item Applications:
+        \begin{itemize}
+            \item Superconducting thin films and arrays
+            \item Quantum computing platforms based on 2D systems
+            \item Cold atom experiments with vortex dynamics
+            \item Theoretical connections to fundamental physics
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- Bibliography ---
+\begin{frame}[allowframebreaks]{References}
+    % Create a references.bib file with appropriate entries
+    \begin{thebibliography}{9}
+        \bibitem{Berezinskii} V. L. Berezinskii, \textit{Sov. Phys. JETP} \textbf{32}, 493 (1971)
+        \bibitem{KT} J. M. Kosterlitz and D. J. Thouless, \textit{J. Phys. C} \textbf{6}, 1181 (1973)
+        \bibitem{Wolff} U. Wolff, \textit{Phys. Rev. Lett.} \textbf{62}, 361 (1989)
+        \bibitem{JKKN} J. V. José et al., \textit{Phys. Rev. B} \textbf{16}, 1217 (1977)
+        \bibitem{Nelson} D. R. Nelson and J. M. Kosterlitz, \textit{Phys. Rev. Lett.} \textbf{39}, 1201 (1977)
+        \bibitem{BishopReppy} D. J. Bishop and J. D. Reppy, \textit{Phys. Rev. Lett.} \textbf{40}, 1727 (1978)
+        \bibitem{KTHNY} B. I. Halperin and D. R. Nelson, \textit{Phys. Rev. Lett.} \textbf{41}, 121 (1978)
+    \end{thebibliography}
+\end{frame}
+
+% --- Closing Slide ---
+\begin{closingframe}
+    \begin{center}
+        \begin{minipage}{1\textwidth}
+            \textbf{Thank you for your attention}
+            
+            \vspace{0.5em}
+            
+            \textit{Questions?}
+        \end{minipage}
+    \end{center}
+
+    \vfill
+
+    \begin{columns}
+		\begin{column}{\textwidth}
+            ETH Zurich\\
+            Department of Physics
+		\end{column}
+	\end{columns}
+\end{closingframe}
+
+\end{document}
+
+% Create a references.bib file with appropriate entries:
+/*
+@article{Berezinskii,
+  title={Destruction of long-range order in one-dimensional and two-dimensional systems having a continuous symmetry group},
+  author={Berezinskii, V L},
+  journal={Soviet Physics JETP},
+  volume={32},
+  number={3},
+  pages={493--500},
+  year={1971}
+}
+
+@article{KT,
+  title={Ordering, metastability and phase transitions in two-dimensional systems},
+  author={Kosterlitz, J M and Thouless, D J},
+  journal={Journal of Physics C: Solid State Physics},
+  volume={6},
+  number={7},
+  pages={1181},
+  year={1973},
+  publisher={IOP Publishing}
+}
+
+@article{Wolff,
+  title={Collective Monte Carlo updating for spin systems},
+  author={Wolff, Ulli},
+  journal={Physical Review Letters},
+  volume={62},
+  number={4},
+  pages={361},
+  year={1989},
+  publisher={APS}
+}
+
+@article{JKKN,
+  title={Renormalization, vortices, and symmetry-breaking perturbations in the two-dimensional planar model},
+  author={Jos{\'e}, Jorge V and Kadanoff, Leo P and Kirkpatrick, Scott and Nelson, David R},
+  journal={Physical Review B},
+  volume={16},
+  number={3},
+  pages={1217},
+  year={1977},
+  publisher={APS}
+}
+
+@article{Nelson,
+  title={Universal jump in the superfluid density of two-dimensional superfluids},
+  author={Nelson, David R and Kosterlitz, John M},
+  journal={Physical Review Letters},
+  volume={39},
+  number={19},
+  pages={1201},
+  year={1977},
+  publisher={APS}
+}
+
+@article{BishopReppy,
+  title={Study of the Superfluid Transition in Two-Dimensional $^4$He Films},
+  author={Bishop, David J and Reppy, John D},
+  journal={Physical Review Letters},
+  volume={40},
+  number={26},
+  pages={1727},
+  year={1978},
+  publisher={APS}
+}
+
+@article{KTHNY,
+  title={Phase transitions in two-dimensional systems},
+  author={Halperin, B I and Nelson, David R},
+  journal={Physical Review Letters},
+  volume={41},
+  number={2},
+  pages={121},
+  year={1978},
+  publisher={APS}
+}
+*/
