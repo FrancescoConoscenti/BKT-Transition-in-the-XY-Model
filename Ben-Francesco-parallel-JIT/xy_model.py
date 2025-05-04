@@ -649,13 +649,12 @@ def run_single_temperature(params: Tuple[SimulationParameters, float, int, str])
         'vorticity': vorticity_avg,
         'stiffness': stiffness_avg,
         'stiffness_error': stiffness_err,
-        'model_state': model if temp_idx % (sim_params.num_points // min(4, sim_params.num_points) + 1) == 0 else None
     }
     
     return temperature, results
 
 
-def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Tuple[SimulationResults, List[Tuple[float, XYModel]]]:
+def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> SimulationResults:
     """
     Simulate the XY model for various temperatures using the specified algorithm.
     Uses corrected stiffness calculation via run_single_temperature.
@@ -669,8 +668,7 @@ def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Tuple[
         
     Returns:
     --------
-    tuple
-        (SimulationResults, sample_states)
+    SimulationResults
     """
     L = sim_params.L
     temperatures = np.linspace(sim_params.T_min, sim_params.T_max, sim_params.num_points)
@@ -689,9 +687,6 @@ def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Tuple[
     vortices = np.zeros(sim_params.num_points)
     stiffnesses = np.zeros(sim_params.num_points)
     stiffness_errors = np.zeros(sim_params.num_points)
-    
-    # Sample states
-    sample_states = []
     
     start_time = time.time()
     
@@ -718,9 +713,6 @@ def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Tuple[
         stiffnesses[i] = result_data['stiffness']
         stiffness_errors[i] = result_data['stiffness_error']
 
-        if result_data['model_state'] is not None:
-            sample_states.append((T, result_data['model_state']))
-    
     elapsed = time.time() - start_time
     logger.info(f"Simulation for L={L} ({algorithm}) completed in {elapsed:.1f} seconds")
     
@@ -755,7 +747,7 @@ def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Tuple[
         T_BKT=T_BKT
     )
     
-    return sim_results, sample_states
+    return sim_results
 
 # ============================================================================
 # Visualization and Main Script - NO CHANGES NEEDED FOR PLOTS
@@ -925,74 +917,6 @@ def visualize_plots(results_dict: Dict[int, SimulationResults], output_dir: str,
     plt.close(fig)
 
 
-def visualize_spins(samples_dict: Dict[int, List[Tuple[float, XYModel]]], output_dir: str, algorithm: str) -> None:
-    """
-    Visualize spin configurations for different lattice sizes and temperatures.
-    
-    Parameters:
-    -----------
-    samples_dict : Dict[int, List[Tuple[float, XYModel]]]
-        Dictionary mapping lattice sizes to lists of (temperature, model) tuples
-    output_dir : str
-        Directory to save plot files
-    algorithm : str
-        Algorithm name for filename
-    """
-    for L, sample_states in samples_dict.items():
-        if not sample_states:
-            continue
-            
-        num_samples = len(sample_states)
-        fig, axes = plt.subplots(1, num_samples, figsize=(5*num_samples, 5), dpi=150, squeeze=False) # Ensure axes is 2D
-
-        for idx, (temp, model) in enumerate(sample_states):
-            ax = axes[0, idx]
-            # Create mesh grid for the arrows
-            x, y = np.meshgrid(np.arange(0, L), np.arange(0, L))
-            
-            # Get the spin components
-            u = np.cos(model.spins)
-            v = np.sin(model.spins)
-            
-            # Plot the arrows
-            ax.quiver(
-                x, y, u, v,
-                pivot='mid',                # Arrows centered on grid points
-                scale=25,                   # Adjust based on arrow length
-                scale_units='width',        # Arrow length relative to figure width
-                width=0.005,                # Thickness of arrow shaft
-                headwidth=4,                # Width of arrowhead
-                headlength=5,               # Length of arrowhead
-                headaxislength=4,           # How far arrowhead extends back
-                color='black'               # Color of arrows
-            )
-            
-            # Calculate and overlay vortices
-            vortices = model.compute_vorticity()
-            for i_lat in range(L):
-                for j_lat in range(L):
-                    vort_val = vortices[i_lat, j_lat]
-                    if vort_val > 0.5: # Check for +1 vortex
-                        ax.plot(j_lat, i_lat, 'ro', markersize=4, alpha=0.7)  # Positive vortex
-                    elif vort_val < -0.5: # Check for -1 vortex
-                        ax.plot(j_lat, i_lat, 'bo', markersize=4, alpha=0.7)  # Negative vortex
-
-            ax.set_title(f'L = {L}, T = {temp:.4f}')
-            ax.set_xlim(-1, L)
-            ax.set_ylim(-1, L)
-            ax.set_aspect('equal')
-            ax.set_xticks([])
-            ax.set_yticks([])
-        
-        plt.tight_layout()
-        spin_filename = f'xy_model_spins_L{L}_{algorithm}.png'
-        try:
-            plt.savefig(os.path.join(output_dir, spin_filename), dpi=300)
-        except Exception as e:
-            logger.error(f"Failed to save spin visualization {spin_filename}: {e}")
-        plt.close(fig)
-
-
 def create_output_dir(output_dir: str) -> str:
     """Create output directory if it doesn't exist."""
     if not os.path.exists(output_dir):
@@ -1033,7 +957,7 @@ def parse_arguments() -> argparse.Namespace:
         help="Base number of Monte Carlo sweeps for thermalization (scales with L)"
     )
     parser.add_argument(
-        "--lattice-sizes", type=int, nargs="+", default=[10, 20, 30, 40],
+        "--lattice-sizes", type=int, nargs="+", default=[6,8,10,12],#[10, 20, 30, 40, 50],
         help="List of lattice sizes to simulate"
     )
     parser.add_argument(
@@ -1129,7 +1053,6 @@ def main() -> None:
     logger.info(f"Using algorithm: {args.algorithm}")
     
     results_dict = {}
-    samples_dict = {}
     
     # --- Simulation Loop --- 
     for L in args.lattice_sizes:
@@ -1157,14 +1080,12 @@ def main() -> None:
             # Note: sim_params.temperatures will be set in simulate_lattice
         )
 
-        results, sample_states = simulate_lattice(sim_params, args.algorithm)
+        results = simulate_lattice(sim_params, args.algorithm)
 
         results_dict[L] = results
-        samples_dict[L] = sample_states
     
     # --- Visualization --- 
     visualize_plots(results_dict, output_dir, args.algorithm)
-    visualize_spins(samples_dict, output_dir, args.algorithm)
 
     # --- Summary --- 
     # Extract L and T_BKT for finite-size scaling
