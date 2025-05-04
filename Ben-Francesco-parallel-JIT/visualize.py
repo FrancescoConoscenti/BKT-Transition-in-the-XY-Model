@@ -16,9 +16,9 @@ from numba import njit, boolean, float64, int64, types
 # --- Basic Configuration ---
 L_VIS = 16
 J_VIS = 1.0
-TEMPERATURES_VIS = [0.50, 0.96, 1.20] # Below, near finite-size T_BKT(L=16), well above
-THERMALIZE_SWEEPS_VIS = 4000       # Doubled sweeps again
-RUN_SWEEPS_VIS = 1000              # Doubled sweeps again
+TEMPERATURES_VIS = [0.50, 0.96, 1.20]
+THERMALIZE_SWEEPS_VIS = 4000
+RUN_SWEEPS_VIS = 1000
 OUTPUT_DIR_VIS = "visualization_results"
 OUTPUT_FILENAME = f"xy_model_L{L_VIS}_visualization.png"
 
@@ -195,8 +195,8 @@ def run_and_visualize():
             by_label = dict(zip(labels, handles))
             ax.legend(by_label.values(), by_label.keys(), fontsize=8, loc='upper right')
 
-    plt.tight_layout(rect=[0, 0, 1, 0.93]) # Reduce top boundary further
-    fig.suptitle(f'XY Model Spin Configurations (L={L_VIS}, Wolff Algorithm)', fontsize=16, y=0.99) # y=0.99 should be fine now
+    plt.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.suptitle(f'XY Model Spin Configurations (L={L_VIS}, Wolff Algorithm)', fontsize=16, y=0.99)
     
     save_path = os.path.join(OUTPUT_DIR_VIS, OUTPUT_FILENAME)
     try:
