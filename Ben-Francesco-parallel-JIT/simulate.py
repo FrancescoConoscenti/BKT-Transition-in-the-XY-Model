@@ -630,7 +630,7 @@ def main():
     parser.add_argument("--num-points", type=int, default=15)
     parser.add_argument("--sweeps", type=int, default=2000)
     parser.add_argument("--thermalize", type=int, default=1000)
-    parser.add_argument("--lattice-sizes", type=int, nargs="+", default=[10,12,14,16])
+    parser.add_argument("--lattice-sizes", type=int, nargs="+", default=[10,20,30,40,50])
     parser.add_argument("--j", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--algorithm", type=str, choices=['metropolis', 'wolff'], default='wolff')
