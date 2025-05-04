@@ -16,8 +16,6 @@ import os
 import sys
 import argparse
 from tqdm import tqdm
-from dataclasses import dataclass
-from typing import List, Tuple, Dict, Optional, Any, Union
 import logging
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing as mp
@@ -33,37 +31,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-@dataclass
-class SimulationParameters:
-    """Container for simulation parameters."""
-    L: int  # Lattice size
-    T_min: float  # Minimum temperature
-    T_max: float  # Maximum temperature
-    num_points: int  # Number of temperature points
-    sweeps: int  # Monte Carlo sweeps per temperature
-    thermalize_sweeps: int  # Thermalization sweeps
-    J: float = 1.0  # Coupling constant
-    temperatures: Optional[np.ndarray] = None # Field added for convenience
-
-
-@dataclass
-class SimulationResults:
-    """Container for simulation results."""
-    temperatures: np.ndarray
-    energies: np.ndarray
-    energy_errors: np.ndarray
-    magnetizations: np.ndarray
-    mag_errors: np.ndarray
-    specific_heat: np.ndarray
-    susceptibility: np.ndarray
-    vortices: np.ndarray
-    stiffnesses: np.ndarray
-    stiffness_errors: np.ndarray
-    T_BKT: float  # Estimated BKT transition temperature
-
-
 # ============================================================================
-# JIT-compiled computational kernels - MODIFIED SECTION
+# JIT-compiled computational kernels
 # ============================================================================
 
 @njit(float64(float64[:,:], int64, float64))
@@ -409,7 +378,7 @@ def wolff_sweep(spins, L, beta, J):
                  break
 
 # ============================================================================
-# Main XY Model class - MODIFIED SECTION
+# Main XY Model class
 # ============================================================================
 
 class XYModel:
@@ -443,13 +412,13 @@ class XYModel:
         """Calculate the vorticity field."""
         return compute_vorticity(self.spins, self.L)
     
-    def calculate_observables(self) -> Tuple[float, float, float, float, float, float, float]:
-        """Calculate standard observables and stiffness components."""
+    def calculate_observables(self):
+        """Calculate all observables for a single configuration."""
         return calculate_observables(self.spins, self.L, self.J)
 
 
 # ============================================================================
-# Simulation Runner and Post-processing - MINOR CHANGES
+# Simulation functions
 # ============================================================================
 
 def find_cross(stiffness: np.ndarray, line: np.ndarray, temperatures: np.ndarray) -> float:
@@ -490,27 +459,14 @@ def find_cross(stiffness: np.ndarray, line: np.ndarray, temperatures: np.ndarray
     return x_cross
 
 
-def run_single_temperature(params: Tuple[SimulationParameters, float, int, str]) -> Tuple[float, Dict[str, Any]]:
-    """
-    Run simulation for a single temperature point using the specified algorithm.
-    Calculates stiffness correctly from ensemble averages.
-    
-    Parameters:
-    -----------
-    params : Tuple
-        (simulation_params, temperature, temp_index, algorithm)
-        
-    Returns:
-    --------
-    Tuple[float, Dict]
-        (temperature, results dictionary including correct stiffness)
-    """
+def run_single_temperature(params):
+    """Run simulation for a single temperature point."""
     sim_params, temperature, temp_idx, algorithm = params
-    L = sim_params.L
-    sweeps = sim_params.sweeps
-    thermalize_sweeps = sim_params.thermalize_sweeps
+    L = sim_params['L']
+    sweeps = sim_params['sweeps']
+    thermalize_sweeps = sim_params['thermalize_sweeps']
     N = L * L
-    model = XYModel(L, J=sim_params.J)
+    model = XYModel(L, J=sim_params['J'])
     beta = 1.0 / temperature
     
     # --- Thermalization phase ---
@@ -654,39 +610,25 @@ def run_single_temperature(params: Tuple[SimulationParameters, float, int, str])
     return temperature, results
 
 
-def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> SimulationResults:
-    """
-    Simulate the XY model for various temperatures using the specified algorithm.
-    Uses corrected stiffness calculation via run_single_temperature.
-    
-    Parameters:
-    -----------
-    sim_params : SimulationParameters
-        Simulation parameters (including L-dependent sweeps)
-    algorithm : str
-        'metropolis' or 'wolff'
-        
-    Returns:
-    --------
-    SimulationResults
-    """
-    L = sim_params.L
-    temperatures = np.linspace(sim_params.T_min, sim_params.T_max, sim_params.num_points)
-    N = L*L
-    sim_params.temperatures = temperatures # Store temps in params object
+def simulate_lattice(sim_params, algorithm):
+    """Simulate the XY model for various temperatures."""
+    L = sim_params['L']
+    temperatures = np.linspace(sim_params['T_min'], sim_params['T_max'], sim_params['num_points'])
+    N = L * L
+    sim_params['temperatures'] = temperatures # Store temps in params object
     
     logger.info(f"Simulating XY model on {L}x{L} lattice using {algorithm} algorithm")
     
     # Arrays to store results
-    energies = np.zeros(sim_params.num_points)
-    energy_errors = np.zeros(sim_params.num_points)
-    energy_sq_avg = np.zeros(sim_params.num_points) # Renamed for clarity
-    magnetizations = np.zeros(sim_params.num_points)
-    mag_errors = np.zeros(sim_params.num_points)
-    mag_sq_avg = np.zeros(sim_params.num_points) # Renamed for clarity
-    vortices = np.zeros(sim_params.num_points)
-    stiffnesses = np.zeros(sim_params.num_points)
-    stiffness_errors = np.zeros(sim_params.num_points)
+    energies = np.zeros(sim_params['num_points'])
+    energy_errors = np.zeros(sim_params['num_points'])
+    energy_sq_avg = np.zeros(sim_params['num_points']) # Renamed for clarity
+    magnetizations = np.zeros(sim_params['num_points'])
+    mag_errors = np.zeros(sim_params['num_points'])
+    mag_sq_avg = np.zeros(sim_params['num_points']) # Renamed for clarity
+    vortices = np.zeros(sim_params['num_points'])
+    stiffnesses = np.zeros(sim_params['num_points'])
+    stiffness_errors = np.zeros(sim_params['num_points'])
     
     start_time = time.time()
     
@@ -733,494 +675,238 @@ def simulate_lattice(sim_params: SimulationParameters, algorithm: str) -> Simula
     logger.info(f"L={L} ({algorithm}): Estimated BKT T_BKT ≈ {T_BKT:.4f}")
     
     # Store results
-    sim_results = SimulationResults(
-        temperatures=temperatures,
-        energies=energies,
-        energy_errors=energy_errors,
-        magnetizations=magnetizations,
-        mag_errors=mag_errors,
-        specific_heat=specific_heat,
-        susceptibility=susceptibility,
-        vortices=vortices,
-        stiffnesses=stiffnesses,
-        stiffness_errors=stiffness_errors, # Now correctly calculated
-        T_BKT=T_BKT
-    )
+    results = {
+        'temperatures': temperatures,
+        'energies': energies,
+        'energy_errors': energy_errors,
+        'magnetizations': magnetizations,
+        'mag_errors': mag_errors,
+        'specific_heat': specific_heat,
+        'susceptibility': susceptibility,
+        'vortices': vortices,
+        'stiffnesses': stiffnesses,
+        'stiffness_errors': stiffness_errors,
+        'T_BKT': T_BKT
+    }
     
-    return sim_results
+    return results
 
 # ============================================================================
-# Visualization and Main Script - NO CHANGES NEEDED FOR PLOTS
+# Visualization functions (simplified)
 # ============================================================================
 
-def visualize_plots(results_dict: Dict[int, SimulationResults], output_dir: str, algorithm: str) -> None:
-    """
-    Create comparison plots for different lattice sizes.
-    
-    Parameters:
-    -----------
-    results_dict : Dict[int, SimulationResults]
-        Dictionary mapping lattice sizes to simulation results
-    output_dir : str
-        Directory to save plot files
-    algorithm : str
-        Algorithm used ('metropolis' or 'wolff')
-    """
+def visualize_plots(results_dict, output_dir, algorithm):
+    """Create comparison plots for different lattice sizes."""
     plt.style.use('ggplot')
     lattice_sizes = sorted(results_dict.keys())
     colors = plt.cm.viridis(np.linspace(0, 0.9, len(lattice_sizes)))
     
     # Create subplots
     fig, axes = plt.subplots(3, 2, figsize=(14, 16), dpi=150)
+    plot_props = {
+        (0, 0): {'y': 'energies', 'yerr': 'energy_errors', 'title': 'Energy vs Temperature', 'ylabel': 'Energy per site'},
+        (0, 1): {'y': 'magnetizations', 'yerr': 'mag_errors', 'title': 'Magnetization vs Temperature', 'ylabel': 'Magnetization'},
+        (1, 0): {'y': 'specific_heat', 'title': 'Specific Heat vs Temperature', 'ylabel': 'Specific Heat per Site'},
+        (1, 1): {'y': 'susceptibility', 'title': 'Susceptibility vs Temperature', 'ylabel': 'Susceptibility per Site'},
+        (2, 0): {'y': 'vortices', 'title': 'Vortex Density vs Temperature', 'ylabel': 'Vortex Density'},
+        (2, 1): {'y': 'stiffnesses', 'yerr': 'stiffness_errors', 'title': 'Spin Stiffness vs Temperature with BKT Transition', 'ylabel': 'Spin Stiffness'}
+    }
     
-    # Energy vs Temperature
-    ax = axes[0, 0]
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        ax.errorbar(
-            results.temperatures, results.energies, yerr=results.energy_errors,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}'
-        )
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Energy per site', fontsize=12)
-    ax.set_title('Energy vs Temperature', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
+    # Plot each subplot
+    for (row, col), props in plot_props.items():
+        ax = axes[row, col]
+        for i, L in enumerate(lattice_sizes):
+            results = results_dict[L]
+            if 'yerr' in props:
+                ax.errorbar(
+                    results['temperatures'], results[props['y']], yerr=results[props.get('yerr')],
+                    marker='o', markersize=4, linestyle='-', linewidth=1.5,
+                    color=colors[i], label=f'L = {L}'
+                )
+            else:
+                ax.plot(
+                    results['temperatures'], results[props['y']],
+                    marker='o', markersize=4, linestyle='-', linewidth=1.5,
+                    color=colors[i], label=f'L = {L}'
+                )
+        
+        # Add theoretical line for stiffness plot
+        if (row, col) == (2, 1):
+            T_plot = results_dict[lattice_sizes[-1]]['temperatures']
+            line = 2/np.pi * T_plot
+            ax.plot(T_plot, line, 'k--', label=r'$\frac{2}{\pi}T$', linewidth=1.5)
+            
+            # Add transition temperature markers
+            for i, L in enumerate(lattice_sizes):
+                results = results_dict[L]
+                if not np.isnan(results['T_BKT']):
+                    ax.axvline(results['T_BKT'], color=colors[i], linestyle=':', alpha=0.7)
+                    ax.text(
+                        results['T_BKT'], 0.1 + 0.05 * (i % 4), f'T_BKT(L={L})={results["T_BKT"]:.3f}',
+                        color=colors[i], rotation=90, fontsize=8, verticalalignment='bottom'
+                    )
+        
+        ax.set_xlabel('Temperature (T)', fontsize=12)
+        ax.set_ylabel(props['ylabel'], fontsize=12)
+        ax.set_title(props['title'], fontsize=14)
+        ax.legend(fontsize=10)
+        ax.grid(True, alpha=0.3)
     
-    # Magnetization vs Temperature
-    ax = axes[0, 1]
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        ax.errorbar(
-            results.temperatures, results.magnetizations, yerr=results.mag_errors,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}'
-        )
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Magnetization', fontsize=12)
-    ax.set_title('Magnetization vs Temperature', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
-    
-    # Specific Heat vs Temperature
-    ax = axes[1, 0]
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        ax.plot(
-            results.temperatures, results.specific_heat,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}'
-        )
-        # Consider adding error bars for Cv if calculable (e.g., via Jackknife on energy_sq)
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Specific Heat per Site', fontsize=12) # Updated label
-    ax.set_title('Specific Heat vs Temperature', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
-    
-    # Susceptibility vs Temperature
-    ax = axes[1, 1]
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        ax.plot(
-            results.temperatures, results.susceptibility,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}'
-        )
-        # Consider adding error bars for Chi if calculable
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Susceptibility per Site', fontsize=12) # Updated label
-    ax.set_title('Susceptibility vs Temperature', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
-    
-    # Vortex Density vs Temperature
-    ax = axes[2, 0]
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        ax.plot(
-            results.temperatures, results.vortices,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}'
-        )
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Vortex Density', fontsize=12)
-    ax.set_title('Vortex Density vs Temperature', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
-    
-    # Stiffness vs Temperature
-    ax = axes[2, 1]
-    T_plot = None # Keep track of temperatures for the theoretical line
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        T_plot = results.temperatures # Store last temperature array
-        # Plot stiffness with error bars
-        ax.errorbar(
-            results.temperatures, results.stiffnesses, yerr=results.stiffness_errors,
-            marker='o', markersize=4, linestyle='-', linewidth=1.5,
-            color=colors[i], label=f'L = {L}',
-            elinewidth=1, capsize=3, alpha=0.8
-        )
-        # Faint line connecting markers underneath error bars
-        # ax.plot(results.temperatures, results.stiffnesses, marker='', linestyle='-', color=colors[i], alpha=0.5)
-
-    # Ensure we have temperatures to plot the theoretical line
-    if T_plot is not None:
-        line = 2/np.pi * T_plot
-        ax.plot(T_plot, line, 'k--', label=r'$\frac{2}{\pi}T$', linewidth=1.5)
-    else:
-        logger.warning("Could not plot theoretical 2T/pi line for stiffness.")
-
-    
-    # Add transition temperature markers
-    for i, L in enumerate(lattice_sizes):
-        results = results_dict[L]
-        if results.T_BKT is not None and not np.isnan(results.T_BKT):
-            ax.axvline(results.T_BKT, color=colors[i], linestyle=':', alpha=0.7)
-            # Adjust text position slightly to avoid overlap
-            text_y_pos = 0.1 + 0.05 * (i % 4) # Simple vertical staggering
-            ax.text(
-                results.T_BKT, text_y_pos, f'T_BKT(L={L})={results.T_BKT:.3f}',
-                color=colors[i], rotation=90, fontsize=8,
-                verticalalignment='bottom'
-            )
-    
-    ax.set_xlabel('Temperature (T)', fontsize=12)
-    ax.set_ylabel('Spin Stiffness', fontsize=12)
-    ax.set_title('Spin Stiffness vs Temperature with BKT Transition', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.3)
-    ax.set_ylim(bottom=min(0, ax.get_ylim()[0])) # Ensure y=0 is visible if stiffness goes negative
-    
-    # Add a summary of transition temperatures in a text box
-    props = dict(boxstyle='round', facecolor='white', alpha=0.5)
+    # Add summary text box
     textstr = "BKT Transition Temperature Estimates:\n"
-    valid_tbkt_count = 0
     for L in lattice_sizes:
         results = results_dict[L]
-        if results.T_BKT is not None and not np.isnan(results.T_BKT):
-            textstr += f"L = {L}: T_BKT = {results.T_BKT:.4f}\n"
-            valid_tbkt_count += 1
+        if not np.isnan(results['T_BKT']):
+            textstr += f"L = {L}: T_BKT = {results['T_BKT']:.4f}\n"
         else:
             textstr += f"L = {L}: T_BKT = NaN\n"
     textstr += f"Theoretical: T_BKT ≈ 0.8935"
-    # Place text box relative to figure, adjust position if needed
-    fig.text(0.5, 0.01, textstr, fontsize=12, bbox=props, ha='center', va='bottom')
+    fig.text(0.5, 0.01, textstr, fontsize=12, bbox=dict(boxstyle='round', facecolor='white', alpha=0.5), ha='center')
 
-    plt.tight_layout(rect=[0, 0.05, 1, 0.98]) # Adjust rect to make space for text
-    main_title = f'XY Model Simulation Results ({algorithm.capitalize()} Algorithm)'
-    fig.suptitle(main_title, y=0.995) # Add main title slightly higher
-    plot_filename = f'xy_model_comparison_{algorithm}.png'
-    plt.savefig(os.path.join(output_dir, plot_filename), dpi=300, bbox_inches='tight')
+    plt.tight_layout(rect=[0, 0.05, 1, 0.98])
+    fig.suptitle(f'XY Model Simulation Results ({algorithm.capitalize()} Algorithm)', y=0.995)
+    plt.savefig(os.path.join(output_dir, f'xy_model_comparison_{algorithm}.png'), dpi=300, bbox_inches='tight')
     plt.close(fig)
 
+def scaling_func_log_sq(L, T_inf, a):
+    """Scaling function T(L) = T_inf + a / (ln(L))^2."""
+    L = np.array(L)
+    valid_L = L > 1
+    result = np.full_like(L, np.nan, dtype=float)
+    if np.any(valid_L):
+        logL = np.log(L[valid_L])
+        result[valid_L] = T_inf + a / (logL**2)
+    return result
 
-def create_output_dir(output_dir: str) -> str:
-    """Create output directory if it doesn't exist."""
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-        logger.info(f"Created output directory: {output_dir}")
-    return output_dir
-
-
-def parse_arguments() -> argparse.Namespace:
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(
-        description="XY Model Simulation with Kosterlitz-Thouless Transition Analysis",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
+def visualize_finite_size_scaling(L_values, T_bkt_values, T_bkt_errors, popt, pcov, output_dir, algorithm):
+    """Plot T_BKT(L) vs 1/(ln L)^2 and the linear fit."""
+    T_inf, a = popt
+    T_inf_err = np.sqrt(pcov[0, 0]) if pcov.size > 0 else np.nan
     
-    parser.add_argument(
-        "--output-dir", type=str, default="xy_model_results",
-        help="Directory to save results and plots"
-    )
-    parser.add_argument(
-        "--t-min", type=float, default=0.7,
-        help="Minimum temperature for simulation"
-    )
-    parser.add_argument(
-        "--t-max", type=float, default=1.1,
-        help="Maximum temperature for simulation"
-    )
-    parser.add_argument(
-        "--num-points", type=int, default=15,
-        help="Number of temperature points to simulate"
-    )
-    parser.add_argument(
-        "--sweeps", type=int, default=2000, # Base sweeps for L=10 Metropolis / effective sweeps for Wolff
-        help="Base number of Monte Carlo sweeps per temperature (scales with L)"
-    )
-    parser.add_argument(
-        "--thermalize", type=int, default=1000, # Base thermalization
-        help="Base number of Monte Carlo sweeps for thermalization (scales with L)"
-    )
-    parser.add_argument(
-        "--lattice-sizes", type=int, nargs="+", default=[6,8,10,12],#[10, 20, 30, 40, 50],
-        help="List of lattice sizes to simulate"
-    )
-    parser.add_argument(
-        "--j", type=float, default=1.0,
-        help="Coupling constant (J > 0 for ferromagnetic)"
-    )
-    parser.add_argument(
-        "--seed", type=int, default=None,
-        help="Random seed for reproducibility"
-    )
-    parser.add_argument(
-        "--algorithm", type=str, choices=['metropolis', 'wolff'], default='wolff',
-        help="Monte Carlo update algorithm to use"
-    )
-    parser.add_argument(
-        "--disable-jit", action="store_true",
-        help="Disable Numba JIT compilation (for debugging)"
-    )
+    valid_mask = L_values > 1
+    L_plot = L_values[valid_mask]
+    T_plot = T_bkt_values[valid_mask]
+    x_plot = 1.0 / (np.log(L_plot)**2)
     
-    return parser.parse_args()
+    x_fit_line = np.linspace(min(x_plot) * 0.9, max(x_plot) * 1.1, 100)
+    T_fit_line = T_inf + a * x_fit_line
 
+    plt.figure(figsize=(8, 6), dpi=120)
+    if T_bkt_errors is not None:
+        plt.errorbar(x_plot, T_plot, yerr=T_bkt_errors[valid_mask], fmt='o', markersize=5,
+                    capsize=3, label='Simulation Data $T_{cross}(L)$')
+    else:
+        plt.plot(x_plot, T_plot, 'o', markersize=5, label='Simulation Data $T_{cross}(L)$')
+        
+    plt.plot(x_fit_line, T_fit_line, 'r--', 
+            label=f'Fit: $T = T_\\infty + a / (\\ln L)^2$ ($T_\\infty = {T_inf:.4f} \\pm {T_inf_err:.4f}$)')
 
-def print_performance_report() -> None:
-    """Print a performance report about the Numba JIT compilation."""
-    try:
-        # Measure performance of key JIT functions
-        L = 20
-        spins = np.random.uniform(0, 2*np.pi, (L, L))
-        beta = 1.0
-        J = 1.0
-        
-        # Warm up JIT
-        _ = total_energy(spins, L, J)
-        _ = compute_vorticity(spins, L)
-        # Stiffness components requires beta, but calculate_observables doesn't pass it
-        # Let's warm up the component calculator directly
-        _ = calculate_stiffness_components(spins, L, J)
-        
-        # Measure energy calculation
-        t0 = time.time()
-        repeats = 1000
-        for _ in range(repeats):
-            _ = total_energy(spins, L, J)
-        energy_time = (time.time() - t0) / repeats
-        
-        # Measure metropolis step
-        t0 = time.time()
-        repeats = 10
-        for _ in range(repeats):
-            metropolis_sweep(spins, L, beta, J)
-        sweep_time_metro = (time.time() - t0) / repeats
+    plt.xlabel(r'$1 / (\ln L)^2$', fontsize=12)
+    plt.ylabel(r'$T_{cross}(L)$', fontsize=12)
+    plt.title(f'Finite-Size Scaling of Crossing Temperature ({algorithm.capitalize()} Algorithm)', fontsize=14)
+    plt.legend(fontsize=10)
+    plt.grid(True, alpha=0.5)
+    plt.text(0.05, 0.95, f'Extrapolated $T(\\infty) = {T_inf:.4f} \\pm {T_inf_err:.4f}$',
+            transform=plt.gca().transAxes, fontsize=10, verticalalignment='top', 
+            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
-        # Measure Wolff effective sweep
-        t0 = time.time()
-        repeats = 2 # Wolff sweeps can be long, use fewer repeats
-        for _ in range(repeats):
-             wolff_sweep(spins, L, beta, J)
-        sweep_time_wolff = (time.time() - t0) / repeats
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, f'xy_model_fss_{algorithm}.png'), dpi=300)
+    plt.close()
 
-        
-        # Measure vorticity calculation
-        t0 = time.time()
-        repeats = 100
-        for _ in range(repeats):
-            _ = compute_vorticity(spins, L)
-        vorticity_time = (time.time() - t0) / repeats
-        
-        logger.info("\nPerformance report (estimates based on L=%d):" % L)
-        logger.info(f"  Energy calculation time: {energy_time*1000:.2f} ms per call")
-        logger.info(f"  Vorticity calculation time: {vorticity_time*1000:.2f} ms per call")
-        logger.info(f"  Metropolis sweep time: {sweep_time_metro*1000:.2f} ms per sweep (L^2 attempts)")
-        logger.info(f"  Wolff sweep time: {sweep_time_wolff*1000:.2f} ms per effective sweep (L^2 cluster builds)")
-        
-    except Exception as e:
-        logger.warning(f"Could not generate full performance report: {e}")
+# ============================================================================
+# Main script
+# ============================================================================
 
-
-def main() -> None:
-    """Main function to run the simulation."""
-    args = parse_arguments()
+def main():
+    parser = argparse.ArgumentParser(description="XY Model Simulation", 
+                                    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    
+    parser.add_argument("--output-dir", type=str, default="xy_model_results")
+    parser.add_argument("--t-min", type=float, default=0.7)
+    parser.add_argument("--t-max", type=float, default=1.1)
+    parser.add_argument("--num-points", type=int, default=15)
+    parser.add_argument("--sweeps", type=int, default=2000)
+    parser.add_argument("--thermalize", type=int, default=1000)
+    parser.add_argument("--lattice-sizes", type=int, nargs="+", default=[10,12,14,16])
+    parser.add_argument("--j", type=float, default=1.0)
+    parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--algorithm", type=str, choices=['metropolis', 'wolff'], default='wolff')
+    parser.add_argument("--disable-jit", action="store_true")
+    
+    args = parser.parse_args()
     
     if args.seed is not None:
         np.random.seed(args.seed)
-        logger.info(f"Random seed set to {args.seed}")
     
     if args.disable_jit:
-        logger.warning("JIT compilation disabled - performance will be significantly reduced")
         numba.config.DISABLE_JIT = True
-    else:
-        print_performance_report() # Print performance report unless JIT disabled
     
-    output_dir = create_output_dir(args.output_dir)
-    logger.info(f"Using algorithm: {args.algorithm}")
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
     
     results_dict = {}
     
-    # --- Simulation Loop --- 
     for L in args.lattice_sizes:
-        base_thermalize = args.thermalize
-        base_sweeps = args.sweeps
-        current_thermalize_sweeps = base_thermalize
-        current_sweeps = base_sweeps
-
-        # Apply L-dependent scaling only for Metropolis
+        # Scale sweeps for Metropolis (but not for Wolff)
+        thermalize_sweeps = args.thermalize
+        sweeps = args.sweeps
+        
         if args.algorithm == 'metropolis':
-            if L <= 10: scale_factor = 1
-            elif L <= 20: scale_factor = 2
-            elif L <= 30: scale_factor = 5
-            else: scale_factor = 10 # For L=40 and above
-            current_thermalize_sweeps = base_thermalize * scale_factor
-            current_sweeps = base_sweeps * scale_factor
-            logger.info(f"L={L} (Metropolis): Applying scale factor {scale_factor}. Sweeps: {current_thermalize_sweeps} therm, {current_sweeps} meas.")
-        else:
-            # For Wolff, use the base sweeps for all L by default
-            logger.info(f"L={L} (Wolff): Using base sweeps. Sweeps: {current_thermalize_sweeps} therm, {current_sweeps} meas.")
-
-        sim_params = SimulationParameters(
-            L=L, T_min=args.t_min, T_max=args.t_max, num_points=args.num_points,
-            sweeps=current_sweeps, thermalize_sweeps=current_thermalize_sweeps, J=args.j
-            # Note: sim_params.temperatures will be set in simulate_lattice
-        )
+            scale_factor = 1 if L <= 10 else (2 if L <= 20 else (5 if L <= 30 else 10))
+            thermalize_sweeps *= scale_factor
+            sweeps *= scale_factor
+        
+        sim_params = {
+            'L': L,
+            'T_min': args.t_min,
+            'T_max': args.t_max,
+            'num_points': args.num_points,
+            'sweeps': sweeps,
+            'thermalize_sweeps': thermalize_sweeps,
+            'J': args.j
+        }
 
         results = simulate_lattice(sim_params, args.algorithm)
 
         results_dict[L] = results
     
-    # --- Visualization --- 
-    visualize_plots(results_dict, output_dir, args.algorithm)
+    # Visualization
+    visualize_plots(results_dict, args.output_dir, args.algorithm)
 
-    # --- Summary --- 
-    # Extract L and T_BKT for finite-size scaling
+    # Finite-size scaling analysis
     L_values = np.array(sorted(results_dict.keys()))
-    T_bkt_values = np.array([results_dict[L].T_BKT for L in L_values])
-    # Get stiffness errors near T_BKT to estimate T_BKT error (optional, crude)
-    # A proper T_BKT error requires error propagation from stiffness fit
-    T_bkt_errors = np.array([results_dict[L].stiffness_errors[np.abs(results_dict[L].temperatures - results_dict[L].T_BKT).argmin()] if results_dict[L].T_BKT is not None and not np.isnan(results_dict[L].T_BKT) else np.nan for L in L_values])
-
-    # --- Debug: Print calculated T_BKT(L) values --- 
-    print("\nCalculated T_BKT(L) values before FSS fitting:")
-    for l_val, t_val in zip(L_values, T_bkt_values):
-        print(f"  L = {l_val:2d}: T_BKT = {t_val}")
-    print("----------------------------------------------")
-
+    T_bkt_values = np.array([results_dict[L]['T_BKT'] for L in L_values])
+    
     # Filter out NaN values for fitting
-    valid_mask = ~np.isnan(T_bkt_values) & (L_values > 1) # Ensure L > 1 for log
-    if np.sum(valid_mask) >= 3: # Need at least 3 points to fit 2 parameters reliably
+    valid_mask = ~np.isnan(T_bkt_values) & (L_values > 1)
+    if np.sum(valid_mask) >= 3:
         L_fit = L_values[valid_mask]
         T_fit = T_bkt_values[valid_mask]
-        # Optional: Use T_bkt_errors as sigma for weighted fit if reliable
-        # T_err_fit = T_bkt_errors[valid_mask]
-
+        
         try:
-            popt, pcov = curve_fit(scaling_func_log_sq, L_fit, T_fit,
-                                   p0=[0.9, 1.0]) # Initial guess: T_inf=0.9, a=1.0
-                                   # sigma=T_err_fit, absolute_sigma=True) # Optional weighted fit
-
+            popt, pcov = curve_fit(scaling_func_log_sq, L_fit, T_fit, p0=[0.9, 1.0])
             T_inf_fit = popt[0]
             T_inf_err = np.sqrt(pcov[0, 0])
             logger.info(f"Finite-size scaling fit: T_BKT(inf) = {T_inf_fit:.4f} +/- {T_inf_err:.4f}")
-
-            # --- Plot Finite-Size Scaling --- 
-            # Pass errors if you trust them, otherwise pass None
-            visualize_finite_size_scaling(L_values, T_bkt_values, None, # Pass T_bkt_errors if desired
-                                        popt, pcov, output_dir, args.algorithm)
-
-        except RuntimeError as e:
-            logger.error(f"Finite-size scaling curve_fit failed: {e}")
+            
+            visualize_finite_size_scaling(L_values, T_bkt_values, None, popt, pcov, args.output_dir, args.algorithm)
         except Exception as e:
-            logger.error(f"Error during finite-size scaling analysis: {e}")
+            logger.error(f"Finite-size scaling analysis failed: {e}")
     else:
-        logger.warning(f"Skipping finite-size scaling fit: Need at least 3 valid T_BKT(L) points (found {np.sum(valid_mask)})." )
+        logger.warning(f"Skipping finite-size scaling fit: Need at least 3 valid T_BKT(L) points")
 
+    # Print summary
     print(f"\nSummary of Kosterlitz-Thouless Transition Temperatures ({args.algorithm.capitalize()} Algorithm):")
     print("------------------------------------------------------")
-    for L in sorted(results_dict.keys()): # Sort by L for consistent output
-        t_bkt_val = results_dict[L].T_BKT
-        if t_bkt_val is not None and not np.isnan(t_bkt_val):
+    for L in sorted(results_dict.keys()):
+        t_bkt_val = results_dict[L]['T_BKT']
+        if not np.isnan(t_bkt_val):
             print(f"Lattice size L = {L:2d}: T_BKT = {t_bkt_val:.4f}")
         else:
             print(f"Lattice size L = {L:2d}: T_BKT = NaN")
     print("Theoretical value: T_BKT ≈ 0.8935")
-    print(f"\nResults and plots saved to: {output_dir}")
-
-# ============================================================================
-# Finite-Size Scaling Function
-# ============================================================================
-
-def scaling_func_log_sq(L, T_inf, a):
-    """Scaling function T(L) = T_inf + a / (ln(L))^2."""
-    # Add small epsilon to avoid log(0) or division by zero if L=1 is ever used
-    # Also handle potential non-positive L values passed erroneously
-    L = np.array(L)
-    valid_L = L > 1
-    result = np.full_like(L, np.nan, dtype=float)
-    if np.any(valid_L):
-      logL = np.log(L[valid_L])
-      result[valid_L] = T_inf + a / (logL**2)
-    return result
-
-def visualize_finite_size_scaling(L_values: np.ndarray, T_bkt_values: np.ndarray, T_bkt_errors: Optional[np.ndarray],
-                                popt: np.ndarray, pcov: np.ndarray,
-                                output_dir: str, algorithm: str) -> None:
-    """
-    Plot T_BKT(L) vs 1/(ln L)^2 and the linear fit to extrapolate T_BKT(inf).
-    """
-    T_inf, a = popt
-    try:
-        T_inf_err = np.sqrt(pcov[0, 0])
-        a_err = np.sqrt(pcov[1, 1])
-    except (IndexError, ValueError):
-        T_inf_err = np.nan
-        a_err = np.nan
-
-    # Calculate x-axis values: 1 / (ln L)^2
-    # Ensure L > 1 for log
-    valid_mask = L_values > 1
-    if not np.any(valid_mask):
-        logger.warning("No lattice sizes > 1 found for finite-size scaling plot.")
-        return
-    
-    L_plot = L_values[valid_mask]
-    T_plot = T_bkt_values[valid_mask]
-    if T_bkt_errors is not None:
-        T_err_plot = T_bkt_errors[valid_mask]
-    else:
-        T_err_plot = None
-       
-    x_plot = 1.0 / (np.log(L_plot)**2)
-    
-    # Generate points for the fitted line
-    x_fit_line = np.linspace(min(x_plot) * 0.9, max(x_plot) * 1.1, 100)
-    # Need to map x_fit_line back to L for scaling_func, or use T = T_inf + a * x
-    T_fit_line = T_inf + a * x_fit_line
-
-    plt.style.use('ggplot')
-    fig, ax = plt.subplots(figsize=(8, 6), dpi=120)
-
-    # Plot data points with error bars if available
-    if T_err_plot is not None:
-         ax.errorbar(x_plot, T_plot, yerr=T_err_plot, fmt='o', markersize=5,
-                     capsize=3, label='Simulation Data $T_{cross}(L)$')
-    else:
-        ax.plot(x_plot, T_plot, 'o', markersize=5, label='Simulation Data $T_{cross}(L)$')
-        
-    # Plot the linear fit
-    ax.plot(x_fit_line, T_fit_line, 'r--', 
-            label=f'Fit: $T = T_\infty + a / (\\ln L)^2$ ($T_\infty = {T_inf:.4f} \\pm {T_inf_err:.4f}$)\'')
-
-    ax.set_xlabel(r'$1 / (\ln L)^2$', fontsize=12)
-    ax.set_ylabel(r'$T_{cross}(L)$', fontsize=12)
-    ax.set_title(f'Finite-Size Scaling of Crossing Temperature ({algorithm.capitalize()} Algorithm)', fontsize=14)
-    ax.legend(fontsize=10)
-    ax.grid(True, alpha=0.5)
-
-    # Add text for extrapolated value near y-intercept
-    ax.text(0.05, 0.95, f'Extrapolated $T(\infty) = {T_inf:.4f} \\pm {T_inf_err:.4f}$',
-            transform=ax.transAxes, fontsize=10, verticalalignment='top', 
-            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
-
-    plt.tight_layout()
-    plot_filename = f'xy_model_fss_{algorithm}.png'
-    plt.savefig(os.path.join(output_dir, plot_filename), dpi=300)
-    plt.close(fig)
+    print(f"\nResults and plots saved to: {args.output_dir}")
 
 if __name__ == "__main__":
     main() 
