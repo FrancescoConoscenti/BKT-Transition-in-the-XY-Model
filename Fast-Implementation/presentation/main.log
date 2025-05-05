@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.5.4)  4 MAY 2025 18:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.5.4)  5 MAY 2025 14:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1566,75 +1566,95 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 172.
 ]
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 199.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 195.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
-Overfull \vbox (15.01332pt too high) detected at line 199
- []
-
+<images/visualization/xy_model_L20_T0.85_vis.png, id=176, 397.485pt x 397.485pt>
+File: images/visualization/xy_model_L20_T0.85_vis.png Graphic file (type png)
+<use images/visualization/xy_model_L20_T0.85_vis.png>
+Package pdftex.def Info: images/visualization/xy_model_L20_T0.85_vis.png  used on input line 195.
+(pdftex.def)             Requested size: 131.45245pt x 131.4555pt.
+<images/visualization/xy_model_L20_T0.92_vis.png, id=178, 397.485pt x 397.485pt>
+File: images/visualization/xy_model_L20_T0.92_vis.png Graphic file (type png)
+<use images/visualization/xy_model_L20_T0.92_vis.png>
+Package pdftex.def Info: images/visualization/xy_model_L20_T0.92_vis.png  used on input line 195.
+(pdftex.def)             Requested size: 131.45245pt x 131.4555pt.
+<images/visualization/xy_model_L20_T1.20_vis.png, id=179, 397.485pt x 397.485pt>
+File: images/visualization/xy_model_L20_T1.20_vis.png Graphic file (type png)
+<use images/visualization/xy_model_L20_T1.20_vis.png>
+Package pdftex.def Info: images/visualization/xy_model_L20_T1.20_vis.png  used on input line 195.
+(pdftex.def)             Requested size: 131.45245pt x 131.4555pt.
 
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 199.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 195.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [18
 
-]
-Overfull \vbox (15.01332pt too high) detected at line 199
+ <./images/visualization/xy_model_L20_T0.85_vis.png> <./images/visualization/xy_model_L20_T0.92_vis.png> <./images/visualization/xy_model_L20_T1.20_vis.png>]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 223.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
+Overfull \vbox (15.01332pt too high) detected at line 223
  []
 
 
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 199.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 223.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [19
 
 ]
-Overfull \vbox (15.01332pt too high) detected at line 199
+Overfull \vbox (15.01332pt too high) detected at line 223
  []
 
 
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 199.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 223.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [20
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 202.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
- (./main.toc)
+Overfull \vbox (15.01332pt too high) detected at line 223
+ []
+
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 202.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 223.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [21
 
 ]
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 227.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 226.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
+ (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 227.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 226.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [22
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 251.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 227.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 251.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [23
 
@@ -1642,28 +1662,28 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 227.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 227.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 251.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [24
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 253.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 253.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 251.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [25
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 253.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [26
 
@@ -1671,28 +1691,28 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 253.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 253.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [27
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 277.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 277.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [28
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 305.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 277.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 305.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [29
 
@@ -1700,20 +1720,15 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 277.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 277.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 305.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [30
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
- (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 280.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 305.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [31
 
@@ -1722,11 +1737,7 @@ File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
 Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 308.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
-Overfull \vbox (3.43066pt too high) detected at line 308
- []
-
-
+ (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
@@ -1735,47 +1746,56 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 308.
 [32
 
 ]
-Overfull \vbox (3.43066pt too high) detected at line 308
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 336.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
+Overfull \vbox (3.43066pt too high) detected at line 336
  []
 
 
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 308.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 336.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [33
 
 ]
-Overfull \vbox (3.43066pt too high) detected at line 308
+Overfull \vbox (3.43066pt too high) detected at line 336
  []
 
 
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 308.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 336.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [34
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 329.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+Overfull \vbox (3.43066pt too high) detected at line 336
+ []
 
 
+
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 329.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 336.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [35
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 329.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [36
 
@@ -1783,28 +1803,28 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 329.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 329.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [37
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 354.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 354.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [38
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 354.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [39
 
@@ -1812,213 +1832,213 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 354.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 354.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [40
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
- (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 357.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [41
 
 ]
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-<images/xy_model_energy_wolff.png, id=317, 570.6921pt x 426.1521pt>
-File: images/xy_model_energy_wolff.png Graphic file (type png)
-<use images/xy_model_energy_wolff.png>
-Package pdftex.def Info: images/xy_model_energy_wolff.png  used on input line 382.
-(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
-<images/xy_model_specific_heat_wolff.png, id=319, 570.6921pt x 426.1521pt>
-File: images/xy_model_specific_heat_wolff.png Graphic file (type png)
-<use images/xy_model_specific_heat_wolff.png>
-Package pdftex.def Info: images/xy_model_specific_heat_wolff.png  used on input line 382.
-(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
-
-Overfull \vbox (74.94962pt too high) detected at line 382
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 382.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[42
-
- <./images/xy_model_energy_wolff.png> <./images/xy_model_specific_heat_wolff.png>]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 408.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-<images/xy_model_magnetization_wolff.png, id=327, 570.6921pt x 426.1521pt>
-File: images/xy_model_magnetization_wolff.png Graphic file (type png)
-<use images/xy_model_magnetization_wolff.png>
-Package pdftex.def Info: images/xy_model_magnetization_wolff.png  used on input line 408.
-(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
-<images/xy_model_susceptibility_wolff.png, id=328, 570.6921pt x 426.1521pt>
-File: images/xy_model_susceptibility_wolff.png Graphic file (type png)
-<use images/xy_model_susceptibility_wolff.png>
-Package pdftex.def Info: images/xy_model_susceptibility_wolff.png  used on input line 408.
-(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
-
-Overfull \vbox (74.94962pt too high) detected at line 408
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 408.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[43
-
- <./images/xy_model_magnetization_wolff.png> <./images/xy_model_susceptibility_wolff.png>]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 433.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-<images/xy_model_stiffness_wolff.png, id=337, 570.6921pt x 426.1521pt>
-File: images/xy_model_stiffness_wolff.png Graphic file (type png)
-<use images/xy_model_stiffness_wolff.png>
-Package pdftex.def Info: images/xy_model_stiffness_wolff.png  used on input line 433.
-(pdftex.def)             Requested size: 199.1693pt x 148.71979pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 433.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 433.
-
-
-LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 433.
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 433.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[44
-
- <./images/xy_model_stiffness_wolff.png>]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 465.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-<images/xy_model_vortices_wolff.png, id=346, 570.6921pt x 426.1521pt>
-File: images/xy_model_vortices_wolff.png Graphic file (type png)
-<use images/xy_model_vortices_wolff.png>
-Package pdftex.def Info: images/xy_model_vortices_wolff.png  used on input line 465.
-(pdftex.def)             Requested size: 199.1693pt x 148.71979pt.
-
-Overfull \vbox (16.30017pt too high) detected at line 465
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 465.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[45
-
- <./images/xy_model_vortices_wolff.png>]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 495.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-<images/xy_model_fss_wolff.png, id=354, 578.16pt x 433.62pt>
-File: images/xy_model_fss_wolff.png Graphic file (type png)
-<use images/xy_model_fss_wolff.png>
-Package pdftex.def Info: images/xy_model_fss_wolff.png  used on input line 495.
-(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
-
-Overfull \vbox (15.31499pt too high) detected at line 495
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 495.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[46
-
- <./images/xy_model_fss_wolff.png>]
-File: images/xy_model_fss_wolff.png Graphic file (type png)
-<use images/xy_model_fss_wolff.png>
-Package pdftex.def Info: images/xy_model_fss_wolff.png  used on input line 495.
-(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
-
-Overfull \vbox (15.31499pt too high) detected at line 495
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 495.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[47
-
-]
-File: images/xy_model_fss_wolff.png Graphic file (type png)
-<use images/xy_model_fss_wolff.png>
-Package pdftex.def Info: images/xy_model_fss_wolff.png  used on input line 495.
-(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
-
-Overfull \vbox (15.31499pt too high) detected at line 495
- []
-
-
-
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 495.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-[48
-
-]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 498.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 385.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
  (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 498.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 385.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[42
+
+]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 410.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+<images/observables/xy_model_energy_wolff.png, id=330, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_energy_wolff.png Graphic file (type png)
+<use images/observables/xy_model_energy_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_energy_wolff.png  used on input line 410.
+(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
+<images/observables/xy_model_specific_heat_wolff.png, id=331, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_specific_heat_wolff.png Graphic file (type png)
+<use images/observables/xy_model_specific_heat_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_specific_heat_wolff.png  used on input line 410.
+(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
+
+Overfull \vbox (74.94962pt too high) detected at line 410
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 410.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[43
+
+ <./images/observables/xy_model_energy_wolff.png> <./images/observables/xy_model_specific_heat_wolff.png>]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 436.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+<images/observables/xy_model_magnetization_wolff.png, id=340, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_magnetization_wolff.png Graphic file (type png)
+<use images/observables/xy_model_magnetization_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_magnetization_wolff.png  used on input line 436.
+(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
+<images/observables/xy_model_susceptibility_wolff.png, id=341, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_susceptibility_wolff.png Graphic file (type png)
+<use images/observables/xy_model_susceptibility_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_susceptibility_wolff.png  used on input line 436.
+(pdftex.def)             Requested size: 179.25114pt x 133.84846pt.
+
+Overfull \vbox (74.94962pt too high) detected at line 436
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 436.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[44
+
+ <./images/observables/xy_model_magnetization_wolff.png> <./images/observables/xy_model_susceptibility_wolff.png>]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 461.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+<images/observables/xy_model_stiffness_wolff.png, id=349, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_stiffness_wolff.png Graphic file (type png)
+<use images/observables/xy_model_stiffness_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_stiffness_wolff.png  used on input line 461.
+(pdftex.def)             Requested size: 199.1693pt x 148.71979pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 461.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 461.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 461.
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 461.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[45
+
+ <./images/observables/xy_model_stiffness_wolff.png>]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 493.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+<images/observables/xy_model_vortices_wolff.png, id=358, 570.6921pt x 426.1521pt>
+File: images/observables/xy_model_vortices_wolff.png Graphic file (type png)
+<use images/observables/xy_model_vortices_wolff.png>
+Package pdftex.def Info: images/observables/xy_model_vortices_wolff.png  used on input line 493.
+(pdftex.def)             Requested size: 199.1693pt x 148.71979pt.
+
+Overfull \vbox (16.30017pt too high) detected at line 493
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 493.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[46
+
+ <./images/observables/xy_model_vortices_wolff.png>]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 523.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+<images/scaling/xy_model_fss_wolff.png, id=366, 578.16pt x 433.62pt>
+File: images/scaling/xy_model_fss_wolff.png Graphic file (type png)
+<use images/scaling/xy_model_fss_wolff.png>
+Package pdftex.def Info: images/scaling/xy_model_fss_wolff.png  used on input line 523.
+(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
+
+Overfull \vbox (15.31499pt too high) detected at line 523
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 523.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[47
+
+ <./images/scaling/xy_model_fss_wolff.png>]
+File: images/scaling/xy_model_fss_wolff.png Graphic file (type png)
+<use images/scaling/xy_model_fss_wolff.png>
+Package pdftex.def Info: images/scaling/xy_model_fss_wolff.png  used on input line 523.
+(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
+
+Overfull \vbox (15.31499pt too high) detected at line 523
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 523.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[48
+
+]
+File: images/scaling/xy_model_fss_wolff.png Graphic file (type png)
+<use images/scaling/xy_model_fss_wolff.png>
+Package pdftex.def Info: images/scaling/xy_model_fss_wolff.png  used on input line 523.
+(pdftex.def)             Requested size: 199.1693pt x 149.3741pt.
+
+Overfull \vbox (15.31499pt too high) detected at line 523
+ []
+
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 523.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [49
 
 ]
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 525.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 526.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
+ (./main.toc)
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 525.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 526.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [50
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 553.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 525.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 553.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [51
 
@@ -2026,28 +2046,28 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 525.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 525.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 553.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [52
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 551.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 551.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 553.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [53
 
 ]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 579.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 551.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 579.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [54
 
@@ -2055,30 +2075,38 @@ Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 551.
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 551.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 579.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [55
 
 ]
-File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
-<use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 556.
-(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
-
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 556.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 579.
 (pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
 [56
+
+]
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 584.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+
+
+File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
+<use elements/eth_logo_kurz_pos.pdf>
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 584.
+(pdftex.def)             Requested size: 36.98857pt x 6.02998pt.
+[57
 
 ]
 
 File: elements/eth_logo_kurz_pos.pdf Graphic file (type pdf)
 <use elements/eth_logo_kurz_pos.pdf>
-Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 593.
+Package pdftex.def Info: elements/eth_logo_kurz_pos.pdf  used on input line 621.
 (pdftex.def)             Requested size: 65.44133pt x 11.0602pt.
-[57
+[58
 
 ]
 \tf@nav=\write7
@@ -2102,18 +2130,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 53111 strings out of 473190
- 1206767 string characters out of 5715801
+ 53142 strings out of 473190
+ 1208549 string characters out of 5715801
  2116179 words of memory out of 5000000
- 75172 multiletter control sequences out of 15000+600000
- 649533 words of font info for 168 fonts, out of 8000000 for 9000
+ 75195 multiletter control sequences out of 15000+600000
+ 649865 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,123p,1133b,1684s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvri.pfb>
-Output written on main.pdf (57 pages, 1709508 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvri.pfb>
+Output written on main.pdf (58 pages, 2482316 bytes).
 PDF statistics:
- 537 PDF objects out of 1000 (max. 8388607)
- 416 compressed objects within 5 object streams
- 123 named destinations out of 1000 (max. 500000)
- 49291 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 553 PDF objects out of 1000 (max. 8388607)
+ 423 compressed objects within 5 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 49306 words of extra memory for PDF output out of 51595 (max. 10000000)
 

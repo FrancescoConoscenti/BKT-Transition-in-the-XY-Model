@@ -171,6 +171,30 @@
     \end{itemize}
 \end{frame}
 
+% --- NEW FRAME FOR VISUALIZATION ---
+\begin{frame}{Visualizing Spin Configurations and Vortices}
+    \begin{columns}[T] % Use columns to place images side-by-side
+        \begin{column}{0.33\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/visualization/xy_model_L20_T0.85_vis.png}
+            \tiny $T = 0.85 \lesssim T_{KT}$\\(QLRO, Approaching Transition)
+        \end{column}
+        \begin{column}{0.33\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/visualization/xy_model_L20_T0.92_vis.png}
+            \tiny $T \approx 0.92 \gtrsim T_{KT}$\\(Pairs Unbinding)
+        \end{column}
+        \begin{column}{0.33\textwidth}
+            \centering
+            \includegraphics[width=\linewidth]{images/visualization/xy_model_L20_T1.20_vis.png}
+            \tiny $T = 1.20 > T_{KT}$\\(Disordered, Free Vortices)
+        \end{column}
+    \end{columns}
+    \vspace{0.5em}
+    {\tiny Spin configurations for L=20 showing the transition from quasi-long-range order with bound vortex pairs (left) to a disordered state with proliferating free vortices (right). Red/Blue circles indicate vortex/antivortex locations.}
+\end{frame}
+% --- END NEW FRAME ---
+
 \begin{frame}{Renormalization Group Analysis}
     \begin{itemize}
         \item Mapping to 2D Coulomb gas: vortices as charges with $\ln(r)$ interaction.
@@ -204,25 +228,25 @@
 \begin{frame}{Simulating the XY Model}
     \begin{itemize}
         \item Challenges in simulating BKT transition:
-        \begin{itemize}
-            \item Critical slowing down near phase transition
-            \item Need for large system sizes (finite-size effects)
-            \item Long correlation times
-        \end{itemize}
+            \begin{itemize}
+                \item Critical slowing down near phase transition
+                \item Need for large system sizes (finite-size effects)
+                \item Long correlation times
+            \end{itemize}
         \pause
         \item Standard Metropolis algorithm:
-        \begin{itemize}
-            \item Energy change for spin flip: $\Delta E = -J \sum_{\langle i,j \rangle} [\cos(\theta'_i - \theta_j) - \cos(\theta_i - \theta_j)]$
-            \item Accept new state with probability $P = \min(1, e^{-\beta \Delta E})$
-            \item Very inefficient near critical point due to large correlated regions
-        \end{itemize}
+            \begin{itemize}
+                \item Energy change for spin flip: $\Delta E = -J \sum_{\langle i,j \rangle} [\cos(\theta'_i - \theta_j) - \cos(\theta_i - \theta_j)]$
+                \item Accept new state with probability $P = \min(1, e^{-\beta \Delta E})$
+                \item Very inefficient near critical point due to large correlated regions
+            \end{itemize}
         \pause
         \item More efficient approaches:
-        \begin{itemize}
-            \item \textbf{Wolff cluster algorithm}: Updates entire clusters of spins
-            \item \textbf{Parallel tempering}: Exchanges configurations between different temperatures
-            \item Combination of both methods for optimal efficiency
-        \end{itemize}
+            \begin{itemize}
+                \item \textbf{Wolff cluster algorithm (Implemented):} Updates entire clusters of spins, significantly reducing critical slowing down.
+                \item \textit{Parallel tempering (Discussed):} Exchanges configurations between different temperatures to improve sampling (beneficial but not used in our final simulation code).
+                % \item Combination of both methods for optimal efficiency
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -243,17 +267,21 @@
             \item Efficiently samples low-energy configurations
         \end{itemize}
         \pause
-        \item Our implementation:
+        \item Our implementation (`simulate.py`):
         \begin{itemize}
-            \item Combines Wolff updates with parallel tempering
-            \item Optimally adapts the number of updates based on average cluster size
-            \item Uses numba JIT compilation for performance
+            % \item Combines Wolff updates with parallel tempering
+            % \item Optimally adapts the number of updates based on average cluster size
+            \item Uses the Wolff algorithm (or Metropolis as an option).
+            \item Leverages Numba JIT compilation for performance.
+            \item Runs simulations for different temperatures in parallel using multiprocessing.
+            \item \textit{Note: Does not implement Parallel Tempering (Replica Exchange).}
         \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Parallel Tempering}
     \begin{itemize}
+        \item \textit{(Method discussed for context, not implemented in `simulate.py` results)}
         \item Simulates multiple replicas at different temperatures $T_1 < T_2 < ... < T_M$
         \item Periodically proposes exchanges between adjacent temperatures
         \begin{itemize}
@@ -267,11 +295,11 @@
             \item Configurations can diffuse across temperature space
         \end{itemize}
         \pause
-        \item Implementation details:
+        \item Implementation details (if used):
         \begin{itemize}
             \item Alternating even/odd exchanges for better mixing
             \item Temperature spacing optimized for exchange acceptance rates
-            \item Combined with Wolff algorithm for optimal efficiency
+            \item Often combined with cluster algorithms like Wolff for optimal efficiency
         \end{itemize}
     \end{itemize}
 \end{frame}
@@ -374,9 +402,9 @@
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=0.9\linewidth]{images/xy_model_energy_wolff.png}
+            \includegraphics[width=0.9\linewidth]{images/observables/xy_model_energy_wolff.png}
             \vspace{0.5em}
-            \includegraphics[width=0.9\linewidth]{images/xy_model_specific_heat_wolff.png}
+            \includegraphics[width=0.9\linewidth]{images/observables/xy_model_specific_heat_wolff.png}
         \end{column}
     \end{columns}
 \end{frame}
@@ -400,9 +428,9 @@
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-             \includegraphics[width=0.9\linewidth]{images/xy_model_magnetization_wolff.png}
+             \includegraphics[width=0.9\linewidth]{images/observables/xy_model_magnetization_wolff.png}
              \vspace{0.5em}
-             \includegraphics[width=0.9\linewidth]{images/xy_model_susceptibility_wolff.png}
+             \includegraphics[width=0.9\linewidth]{images/observables/xy_model_susceptibility_wolff.png}
         \end{column}
     \end{columns}
 \end{frame}
@@ -425,7 +453,7 @@
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\linewidth]{images/xy_model_stiffness_wolff.png}
+            \includegraphics[width=\linewidth]{images/observables/xy_model_stiffness_wolff.png}
             \vspace{0.5em}
             {\tiny Plot shows $\rho_s$ vs $T$ for different $L$. The dashed line is $y = 2k_B T/\pi$.}
         \end{column}
@@ -457,7 +485,7 @@
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \includegraphics[width=\linewidth]{images/xy_model_vortices_wolff.png}
+            \includegraphics[width=\linewidth]{images/observables/xy_model_vortices_wolff.png}
              \vspace{0.5em}
             {\tiny Plot shows average vortex density vs $T$ for different $L$.}
         \end{column}
@@ -487,7 +515,7 @@
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-             \includegraphics[width=\linewidth]{images/xy_model_fss_wolff.png}
+             \includegraphics[width=\linewidth]{images/scaling/xy_model_fss_wolff.png}
              \vspace{0.5em}
              {\tiny Plot shows $T_{KT}(L)$ extracted from stiffness data vs $1/(\ln L)^2$. The line is a linear fit.}
         \end{column}

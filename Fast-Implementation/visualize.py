@@ -14,9 +14,9 @@ import numba
 from numba import njit, boolean, float64, int64, types
 
 # --- Basic Configuration ---
-L_VIS = 16
+L_VIS = 20
 J_VIS = 1.0
-TEMPERATURES_VIS = [0.50, 0.96, 1.20]
+TEMPERATURES_VIS = [0.92, 0.93]
 THERMALIZE_SWEEPS_VIS = 4000
 RUN_SWEEPS_VIS = 1000
 OUTPUT_DIR_VIS = "visualization_results"
@@ -123,7 +123,7 @@ class XYModelVis:
 
 def run_and_visualize():
     """Runs simulations for specific temps and generates the plot."""
-    
+
     if not os.path.exists(OUTPUT_DIR_VIS):
         os.makedirs(OUTPUT_DIR_VIS)
         logger.info(f"Created output directory: {OUTPUT_DIR_VIS}")
@@ -136,37 +136,33 @@ def run_and_visualize():
         logger.info(f"Simulating T = {temp:.4f}")
         model = XYModelVis(L=L_VIS, J=J_VIS)
         beta = 1.0 / temp
-        
+
         # Thermalization
         logger.info(f"  Thermalizing for {THERMALIZE_SWEEPS_VIS} sweeps...")
         for _ in tqdm(range(THERMALIZE_SWEEPS_VIS), desc=f"  Therm (T={temp:.2f})", leave=False):
             model.wolff_sweep(beta)
-            
+
         # Run a few more sweeps
         logger.info(f"  Running {RUN_SWEEPS_VIS} sweeps for final configuration...")
         for _ in tqdm(range(RUN_SWEEPS_VIS), desc=f"  Run   (T={temp:.2f})", leave=False):
              model.wolff_sweep(beta)
-             
+
         final_states[temp] = model
         logger.info(f"  Configuration for T={temp:.4f} generated.")
 
-    # --- Plotting ---
-    logger.info("Generating visualization plot...")
-    num_temps = len(TEMPERATURES_VIS)
-    fig, axes = plt.subplots(1, num_temps, figsize=(5 * num_temps, 5.5), dpi=150, squeeze=False)
+        # --- Plotting (Inside the loop for individual plots) ---
+        logger.info(f"Generating visualization plot for T={temp:.2f}...")
+        fig, ax = plt.subplots(1, 1, figsize=(5.5, 5.5), dpi=150) # Create a new figure
 
-    for idx, temp in enumerate(TEMPERATURES_VIS):
-        ax = axes[0, idx]
-        model = final_states[temp]
         spins = model.spins
-        L = model.L # Get L from model for coordinate calculations
-        
+        L = model.L # Use L from the model instance
+
         # Plot spins
         x, y = np.meshgrid(np.arange(0, L), np.arange(0, L))
         u = np.cos(spins)
         v = np.sin(spins)
-        ax.quiver(x, y, u, v, pivot='mid', scale=25, scale_units='width',
-                  width=0.005, headwidth=4, headlength=5, headaxislength=4,
+        ax.quiver(x, y, u, v, pivot='mid', scale=35, scale_units='width',
+                  width=0.004, headwidth=3.5, headlength=4, headaxislength=3.5,
                   color='black')
 
         # --- Plot vortices/antivortices at plaquette centers ---
@@ -176,15 +172,15 @@ def run_and_visualize():
 
         # Plaquette center coordinates (x=j+0.5, y=i+0.5)
         if len(vortex_coords_pos) > 0:
-            ax.scatter(vortex_coords_pos[:, 1] + 0.5, vortex_coords_pos[:, 0] + 0.5, 
+            ax.scatter(vortex_coords_pos[:, 1] + 0.5, vortex_coords_pos[:, 0] + 0.5,
                        s=80, c='red', marker='o', alpha=0.6, label='Vortex (+1)', zorder=10)
         if len(vortex_coords_neg) > 0:
-            ax.scatter(vortex_coords_neg[:, 1] + 0.5, vortex_coords_neg[:, 0] + 0.5, 
+            ax.scatter(vortex_coords_neg[:, 1] + 0.5, vortex_coords_neg[:, 0] + 0.5,
                        s=80, c='blue', marker='o', alpha=0.6, label='Antivortex (-1)', zorder=10)
 
-        ax.set_title(f'L = {L_VIS}, T = {temp:.2f}')
-        ax.set_xlim(-1, L_VIS)
-        ax.set_ylim(-1, L_VIS)
+        ax.set_title(f'XY Model Spin Configuration\nL = {L_VIS}, T = {temp:.2f}')
+        ax.set_xlim(-1, L) # Use L from model here
+        ax.set_ylim(-1, L) # Use L from model here
         ax.set_aspect('equal')
         ax.set_xticks([])
         ax.set_yticks([])
@@ -195,16 +191,18 @@ def run_and_visualize():
             by_label = dict(zip(labels, handles))
             ax.legend(by_label.values(), by_label.keys(), fontsize=8, loc='upper right')
 
-    plt.tight_layout(rect=[0, 0, 1, 0.93])
-    fig.suptitle(f'XY Model Spin Configurations (L={L_VIS}, Wolff Algorithm)', fontsize=16, y=0.99)
-    
-    save_path = os.path.join(OUTPUT_DIR_VIS, OUTPUT_FILENAME)
-    try:
-        plt.savefig(save_path, dpi=300)
-        logger.info(f"Visualization saved to {save_path}")
-    except Exception as e:
-        logger.error(f"Failed to save visualization {save_path}: {e}")
-    plt.close(fig)
+        # Save individual plot
+        output_filename_single = f"xy_model_L{L_VIS}_T{temp:.2f}_vis.png"
+        save_path = os.path.join(OUTPUT_DIR_VIS, output_filename_single)
+        try:
+            plt.tight_layout()
+            plt.savefig(save_path, dpi=300)
+            logger.info(f"Visualization saved to {save_path}")
+        except Exception as e:
+            logger.error(f"Failed to save visualization {save_path}: {e}")
+        plt.close(fig) # Close the figure
+
+    logger.info("Finished generating all individual visualizations.")
 
 
 if __name__ == "__main__":
