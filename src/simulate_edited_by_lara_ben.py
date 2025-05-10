@@ -882,7 +882,7 @@ def main():
     parser.add_argument("--num-points", type=int, default=20)
     parser.add_argument("--sweeps", type=int, default=2000)
     parser.add_argument("--thermalize", type=int, default=2000)
-    parser.add_argument("--lattice-sizes", type=int, nargs="+", default=[20,30,40,50])
+    parser.add_argument("--lattice-sizes", type=int, nargs="+", default=[20,30,40,50,60,70])
     parser.add_argument("--j", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--algorithm", type=str, choices=['metropolis', 'wolff'], default='wolff')
@@ -907,7 +907,7 @@ def main():
         sweeps = args.sweeps
         
         if args.algorithm == 'metropolis':
-            scale_factor = 1 if L <= 10 else (2 if L <= 20 else (5 if L <= 30 else 10))
+            scale_factor = 1 if L <= 10 else (2 if L <= 20 else (5 if L <= 30 else (10 if L <= 40 else (20 if L <= 50 else (30 if L <= 60 else 40)))))
             thermalize_sweeps *= scale_factor
             sweeps *= scale_factor
         
