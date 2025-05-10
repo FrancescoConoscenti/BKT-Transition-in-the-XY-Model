@@ -82,7 +82,7 @@ def site_energy(spins, i, j, L, J):
 
 @njit
 def metropolis_sweep(spins, L, beta, J):
-    """Perform L²  Metropolis spin updates"""
+    """Perform L²   lis spin updates"""
     for _ in range(L * L):
         i, j = np.random.randint(0, L), np.random.randint(0, L)
         old_energy = site_energy(spins, i, j, L, J)
